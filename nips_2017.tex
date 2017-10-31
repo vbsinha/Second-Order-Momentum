@@ -33,10 +33,8 @@
 % on the second line, try using \AND instead of \And before the third
 % author name.
 
-%\author{
-%  Vabhav Sinha\thanks{Use footnote for providing further
-%    information about author (webpage, alternative
-%    address)---\emph{not} for acknowledging funding agencies.} \\
+\author{
+  Vabhav Sinha\\
 %  Department of Computer Science\\
 %  Cranberry-Lemon University\\
 %  Pittsburgh, PA 15213 \\
@@ -62,7 +60,7 @@
   %% Affiliation \\
   %% Address \\
   %% \texttt{email} \\
-%}
+}
 
 \begin{document}
 % \nipsfinalcopy is no longer used
@@ -70,127 +68,42 @@
 \maketitle
 
 \begin{abstract}
-  The abstract paragraph should be indented \nicefrac{1}{2}~inch
-  (3~picas) on both the left- and right-hand margins. Use 10~point
-  type, with a vertical spacing (leading) of 11~points.  The word
-  \textbf{Abstract} must be centered, bold, and in point size 12. Two
-  line spaces precede the abstract. The abstract must be limited to
-  one paragraph.
+  We study the effect of momentum on second order methods, both newton's method as well as quasi-netwon methods like LBFS. We compare the number of steps required with and without momentum to reach close to the optimum value.
 \end{abstract}
 
-\section{Submission of papers to NIPS 2017}
+\section{Project Objective}
 
-NIPS requires electronic submissions.  The electronic submission site
-is
-\begin{center}
-  \url{https://cmt.research.microsoft.com/NIPS2017/}
-\end{center}
+To achieve faster convergence second order methods were proposed over first order methods. Allthough second order methods have better bounds than first order methods and they converge in very few steps, second order methods are often not used practically due to the cost of each step. To cope up with these problems, 2 approaches have been proposed and well studied: (i) Adding momentum to first order methods to make convergence speed comparable to second order methods, (ii) Quasi-newton methods which avoid the costly computations involoved in second order, without compromising the rate of convergence. In this project we aim to combine both these approaches and attempt to verify if the classical second order methods as well as quasi newton methods can be accelerated.
 
-Please read carefully the instructions below and follow them
-faithfully.
+\section{Novelty and Proposed Methodology}
 
-\subsection{Style}
+Momentum has been extensively studied on first order methods[Cite]*. But almost no work has been done upon the effects of momentum on newton’s method. Through this project we seek to address this issue.
 
-Papers to be submitted to NIPS 2017 must be prepared according to the
-instructions presented here. Papers may only be up to eight pages
-long, including figures. This does not include acknowledgments and 
-cited references which are allowed on subsequent pages.
-Papers that exceed these limits will not be reviewed, or in any
-other way considered for presentation at the conference.
+Moreover, to accelerate second order methods several quasi newton methods have been proposed including BFGS[Cite], which was later improved for memory in LBFGS[Cite]. We would also check the performance of momentum on BFGS/LBFGS.
 
-The margins in 2017 are the same as since 2007, which allow for
-$\sim$$15\%$ more words in the paper compared to earlier years.
+\subsection{Brief ideas}
 
-Authors are required to use the NIPS \LaTeX{} style files obtainable
-at the NIPS website as indicated below. Please make sure you use the
-current files and not previous versions. Tweaking the style files may
-be grounds for rejection.
+For first order methods the momentum equation is given as,
 
-\subsection{Retrieval of style files}
+\begin{equation}
+v^{+} = \gamma v + (1-\gamma) \nabla f(x) \\
+x^{+} = x - tv^{+}
+\end{equation}
 
-The style files for NIPS and other conference information are
-available on the World Wide Web at
-\begin{center}
-  \url{http://www.nips.cc/}
-\end{center}
-The file \verb+nips_2017.pdf+ contains these instructions and
-illustrates the various formatting requirements your NIPS paper must
-satisfy.
+Similarly, we propose the momentum equation for second order methods,
 
-The only supported style file for NIPS 2017 is \verb+nips_2017.sty+,
-rewritten for \LaTeXe{}.  \textbf{Previous style files for \LaTeX{}
-  2.09, Microsoft Word, and RTF are no longer supported!}
+\begin{equation}
+v^{+} = \gamma v + (1-\gamma) \nabla^2 f(x)^{-1} \nabla f(x) \\
+x^{+} = x - tv^{+}
+\end{equation}
 
-The new \LaTeX{} style file contains two optional arguments:
-\verb+final+, which creates a camera-ready copy, and \verb+nonatbib+,
-which will not load the \verb+natbib+ package for you in case of
-package clash.
+Similarly we will explore momentum for BFGS. We intend to study both the classical form of momentum[Cite] as well as the one used in deep learning proposed by Sutseker(?)[Cite]
 
-At submission time, please omit the \verb+final+ option. This will
-anonymize your submission and add line numbers to aid review.  Please
-do \emph{not} refer to these line numbers in your paper as they will
-be removed during generation of camera-ready copies.
+\section{Planned Experiments}
 
-The file \verb+nips_2017.tex+ may be used as a ``shell'' for writing
-your paper. All you have to do is replace the author, title, abstract,
-and text of the paper with your own.
+We will compare the performance of first order methods, first order methods with momentum, sth..
 
-The formatting instructions contained in these style files are
-summarized in Sections \ref{gen_inst}, \ref{headings}, and
-\ref{others} below.
-
-\section{General formatting instructions}
-\label{gen_inst}
-
-The text must be confined within a rectangle 5.5~inches (33~picas)
-wide and 9~inches (54~picas) long. The left margin is 1.5~inch
-(9~picas).  Use 10~point type with a vertical spacing (leading) of
-11~points.  Times New Roman is the preferred typeface throughout, and
-will be selected for you by default.  Paragraphs are separated by
-\nicefrac{1}{2}~line space (5.5 points), with no indentation.
-
-The paper title should be 17~point, initial caps/lower case, bold,
-centered between two horizontal rules. The top rule should be 4~points
-thick and the bottom rule should be 1~point thick. Allow
-\nicefrac{1}{4}~inch space above and below the title to rules. All
-pages should start at 1~inch (6~picas) from the top of the page.
-
-For the final version, authors' names are set in boldface, and each
-name is centered above the corresponding address. The lead author's
-name is to be listed first (left-most), and the co-authors' names (if
-different address) are set to follow. If there is only one co-author,
-list both author and co-author side by side.
-
-Please pay special attention to the instructions in Section \ref{others}
-regarding figures, tables, acknowledgments, and references.
-
-\section{Headings: first level}
-\label{headings}
-
-All headings should be lower case (except for first word and proper
-nouns), flush left, and bold.
-
-First-level headings should be in 12-point type.
-
-\subsection{Headings: second level}
-
-Second-level headings should be in 10-point type.
-
-\subsubsection{Headings: third level}
-
-Third-level headings should be in 10-point type.
-
-\paragraph{Paragraphs}
-
-There is also a \verb+\paragraph+ command available, which sets the
-heading in bold, flush left, and inline with the text, with the
-heading followed by 1\,em of space.
-
-\section{Citations, figures, tables, references}
-\label{others}
-
-These instructions apply to everyone.
-
+We can use logistic regression func or $f(x) = (10x_1^2 + x_2^2)/2 + 5 log(1 + e^{-x_1-x_2})$ etc. Basically functions having non circular contours, on which second order methods perform better than first order.
 \subsection{Citations within the text}
 
 The \verb+natbib+ package will be loaded for you by default.
