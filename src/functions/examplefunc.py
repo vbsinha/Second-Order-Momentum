@@ -1,7 +1,7 @@
 from function import Function
 import numpy as np
         
-class QuadraticFunc(Function):
+class ExampleFunc(Function):
     
     def f(self,x):
     	assert x.shape[0] == 2, "Passed point is not 2 dimensional"
@@ -22,8 +22,7 @@ class QuadraticFunc(Function):
         
     def grad2_f(self, x):
         assert x.shape[0] == 2, "Passed point is not 2 dimensional"
-        print "ERROR: Hessian not implemented for example function"
-        return np.array([[0, 0], [0, 0]])
+        return np.array([[2.0, -2.0],[-2.0, 8.0]])
         
     def __str__(self):
         return "Example Function from http://apmonitor.com/me575/index.php/Main/QuasiNewton "
