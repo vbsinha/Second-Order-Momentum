@@ -6,7 +6,7 @@ class FirstOrder:
 		gradient = function.grad_f(x)
 		return gradient 
 	
-	def update_state(self, x, old_x):
+	def update_state(self, function, x, old_x):
 	    pass
 		
 class SecondOrder:
@@ -18,7 +18,7 @@ class SecondOrder:
 		update = np.matmul(grad_inv,grad_1)
 		return update
 	
-	def update_state(self, x, old_x):
+	def update_state(self, function, x, old_x):
 	    pass
 	
 class BFGS:
@@ -27,18 +27,18 @@ class BFGS:
 		self.H = initial_H
 		return
 		
-	def __call__(self,function,x):
-	    return np.matmul(self.H, function.grad_1(x))
+	def __call__(self,function, x):
+	    return np.matmul(self.H, function.grad_f(x))
 	    
-	def update_state(self, x, old_x):
-	    old_grad = function.grad_1(old_x)
-	    grad = function.grad_1(x)
+	def update_state(self, function, x, old_x):
+	    old_grad = function.grad_f(old_x)
+	    grad = function.grad_f(x)
 	    s = x - old_x
-	    y = old_grad - grad
+	    y = grad - old_grad
 	    I = np.diag([1]*len(y))
-	    lhs = I - np.matmul(s, y.T)/np.dot(y, s) 
-	    rhs = I - np.matmul(y, s.T)/np.dot(y, s)
+	    lhs = I - np.outer(s, y)/np.dot(y, s) 
+	    rhs = I - np.outer(y, s)/np.dot(y, s)
 	    a = np.matmul(lhs, self.H)
 	    a = np.matmul(a, rhs)
-	    self.H = a + np.matmul(s, s.T)/np.dot(y, s)
+	    self.H = a + np.outer(s, s)/np.dot(y, s)
 	    return

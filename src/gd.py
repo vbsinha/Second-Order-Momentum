@@ -52,6 +52,6 @@ class GradientDescent:
 			v = self.get_velocity_update(x,v)
 			x = self.get_position_update(x,old_v,eta)
 			points.append(x)
-			self.method.update_state(x, old_x)
+			self.method.update_state(self.function, x, old_x)
 		points = np.array(points)
 		return points, x
