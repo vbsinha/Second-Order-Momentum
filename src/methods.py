@@ -21,9 +21,4 @@ class BFGS:
 		self.H = initial_H
 		
 	def __call__(self,function,x):
-		
-	
-
-	
-
-		
+		pass	
