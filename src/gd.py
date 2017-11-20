@@ -48,8 +48,10 @@ class GradientDescent:
 		points = [start_x]
 		for i in range(0,num_iterations):
 			old_v = v
+			old_x = x
 			v = self.get_velocity_update(x,v)
 			x = self.get_position_update(x,old_v,eta)
 			points.append(x)
+			self.method.update_state(x, old_x)
 		points = np.array(points)
 		return points, x
