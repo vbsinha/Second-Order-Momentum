@@ -3,14 +3,15 @@ import numpy as np
 from plt import plot
 from functions.quadratic import QuadraticFunc
 from functions.ryanfunc import RyanFunc
+from functions.non_quadratic_func import NonQuadraticFunc
 from gd import GradientDescent
 
 x = np.array([6, 10])
-q = RyanFunc()
-g_first = GradientDescent(q, methods.first_order, 0)
-g_first_mom = GradientDescent(q, methods.first_order, 0.9)
-g_second = GradientDescent(q, methods.second_order, 0)
-g_second_mom = GradientDescent(q, methods.second_order, 0.9)
+q = NonQuadraticFunc()
+g_first = GradientDescent(q, methods.first_order, 'momentum', 0)
+g_first_mom = GradientDescent(q, methods.first_order, 'momentum', 0.9)
+g_second = GradientDescent(q, methods.second_order, 'momentum', 0)
+g_second_mom = GradientDescent(q, methods.second_order, 'momentum', 0.9)
 points_first, x_first = g_first.gradient_descent(x, 1000, 0.01)
 points_first_mom, x_first_mom = g_first_mom.gradient_descent(x, 1000, 0.01)
 points_second, x_second = g_second.gradient_descent(x, 1000, 0.01)

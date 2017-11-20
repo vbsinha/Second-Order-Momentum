@@ -37,10 +37,10 @@ class GradientDescent:
 		return update
 		
 	def get_velocity_update(self,x,v):
-		return self.velocity_update_dict(x,v)
+		return self.velocity_update_dict[self.momentum_function](x,v)
 		
 	def get_position_update(self,x,v,eta):
-		return self.position_update_dict(x,v,eta)
+		return self.position_update_dict[self.momentum_function](x,v,eta)
 		
 	def gradient_descent(self,start_x,num_iterations,eta):
 		x = start_x
