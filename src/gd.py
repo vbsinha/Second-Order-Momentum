@@ -42,13 +42,14 @@ class GradientDescent:
 	def get_position_update(self,x,v,eta):
 		return self.position_update_dict[self.momentum_function](x,v,eta)
 		
-	def gradient_descent(self,start_x,num_iterations,eta):
+	def gradient_descent(self,start_x,num_iterations,step_size):
 		x = start_x
 		v = 0
 		points = [start_x]
 		for i in range(0,num_iterations):
 			old_v = v
 			old_x = x
+			eta = step_size(i,x,self.function,self.method)
 			v = self.get_velocity_update(x,v)
 			x = self.get_position_update(x,old_v,eta)
 			points.append(x)
