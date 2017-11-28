@@ -33,7 +33,7 @@ class GradientDescent:
 	def nesterov_position_update(self,x,v,eta):
 		velocity_update = self.nesterov_velocity_update(x,v)
 		update_before_momentum = self.get_update_before_momentum(velocity_update)
-		update = v - eta*update_before_momentum
+		update = velocity_update - eta*update_before_momentum
 		return update
 		
 	def get_velocity_update(self,x,v):
