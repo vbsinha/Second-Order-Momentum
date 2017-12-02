@@ -29,5 +29,8 @@ class RyanFunc(Function):
         grad2_f_x2_x2 = 1 - second_term
         return np.array([[grad2_f_x1_x1, -1*second_term], [-1*second_term, grad2_f_x2_x2]])
         
+    def fstar(self):
+        return self.f(np.array([0.11246718,1.1246718]))
+        
     def __str__(self):
         return "Ryan Function"

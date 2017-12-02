@@ -18,8 +18,17 @@ def plot(func, x_range, y_range, method_points):
 def plot_convergence_rate(func, k_range, method_points):
     k_min = k_range[0]
     k_max = k_range[1]
-    assert k_max <= len(method_points), "Invalid range of iterations given"
     assert k_min >= 0, "Negative value for iteration given"
-    for i in xrange(k_min,k_max):
-        
-        f_x = func.f(method_points)
+    for points, l in method_points:
+        plot_points = []
+        for i in xrange(k_min,k_max):
+            if i >= len(points):
+                break
+            f_x = func.f(points[i])
+            f_star = func.fstar()
+            plot_points.append([f_x-f_star,i])
+        plot_points = np.array(plot_points)
+        plt.plot(plot_points[:,1],plot_points[:,0],label=l)
+    plt.title(str(func))
+    plt.legend()
+    plt.show()

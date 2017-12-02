@@ -1,31 +1,33 @@
 import numpy as np
+from functions.custom_function import CustomFunction
+from step_sizes import BacktrackingLineStep
 
 class FirstOrder:
     
     def __init__(self):
         pass
 	
-	def __call__(self,function,x):
-		gradient = function.grad_f(x)
-		return gradient 
+    def __call__(self,function,x):
+        gradient = function.grad_f(x)
+        return gradient 
 	
-	def update_state(self, function, x, old_x):
-	    pass
+    def update_state(self, function, x, old_x):
+        pass
 		
 class SecondOrder:
     
     def __init__(self):
         pass
 	
-	def __call__(self,function,x):
-		grad_2 = function.grad2_f(x)
-		grad_1 = function.grad_f(x)
-		grad_inv = np.linalg.inv(grad_2)
-		update = np.matmul(grad_inv,grad_1)
-		return update
+    def __call__(self,function,x):
+        grad_2 = function.grad2_f(x)
+        grad_1 = function.grad_f(x)
+        grad_inv = np.linalg.inv(grad_2)
+        update = np.matmul(grad_inv,grad_1)
+        return update
 	
-	def update_state(self, function, x, old_x):
-	    pass
+    def update_state(self, function, x, old_x):
+        pass
 	
 class BFGS:
 	
@@ -103,7 +105,7 @@ class CubicRegularization:
     def __call__(self,function,x):
         old_x = x
         update_f = self.objective_f(function, x)
-        update_grad_f = self.objective_function(function, x)
+        update_grad_f = self.objective_grad_f(function, x)
         self.function = CustomFunction(update_f,update_grad_f,name='Objective for Cubic Regularization')
-        points, new_x = gradient_descent(x,400,BacktrackingLineStep(0.5,0.5,10))
+        points, new_x = self.gradient_descent(x,400,BacktrackingLineStep(0.5,0.5,10))
         return new_x - old_x

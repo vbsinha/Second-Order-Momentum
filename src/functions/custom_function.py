@@ -8,7 +8,7 @@ class CustomFunction(Function):
         self.grad_f = grad_f 
         if grad2_f != None:
             self.grad2_f = grad2_f
-        if fstar != None:
+        if f_star != None:
             self.fstar = f_star
         if f_L != None:
             self.L = f_L
