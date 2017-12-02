@@ -1,6 +1,9 @@
 import numpy as np
 
 class FirstOrder:
+    
+    def __init__(self):
+        pass
 	
 	def __call__(self,function,x):
 		gradient = function.grad_f(x)
@@ -10,6 +13,9 @@ class FirstOrder:
 	    pass
 		
 class SecondOrder:
+    
+    def __init__(self):
+        pass
 	
 	def __call__(self,function,x):
 		grad_2 = function.grad2_f(x)
@@ -42,3 +48,59 @@ class BFGS:
 	    a = np.matmul(a, rhs)
 	    self.H = a + np.outer(s, s)/np.dot(y, s)
 	    return
+	    
+class CubicRegularization:
+    
+    def __init__(self):
+        pass 
+        
+    def update_state(self, function, x, old_x):
+        pass 
+        
+    def objective_f(self,function,x):
+        grad_f = function.grad_f(x)
+        grad2_f = function.grad2_f(x)
+        L = self.get_lipschitz_constant(function)
+        def update_f(y):
+            result = np.dot(grad_f,y-x)
+            result += 0.5*np.dot(np.dot(y-x,grad2_f),y-x)
+            result += L*np.power(np.linalg.norm(y-x),3)
+            return result 
+        return update_f
+        
+    def objective_grad_f(self,function,x):
+        grad_f = function.grad_f(x)
+        grad2_f = function.grad2_f(x)
+        L = self.get_lipschitz_constant(function)
+        def update_grad_f(y):
+            result = grad_f
+            result -= np.matmul(grad2_f,x)
+            result += 0.5*np.matmul(grad2_f,y)
+            norm = np.linalg.norm(y-x) 
+            result += L*norm*(y-x)
+            return result 
+        return update_grad_f 
+        
+    def gradient_descent(self,start_x,num_iterations,step_size,function):
+		x = start_x
+		v = 0
+		points = [start_x]
+		method = FirstOrder()
+		for i in range(0,num_iterations):
+			old_v = v
+			old_x = x
+			eta = step_size(i,x,function,method)
+			v = self.get_velocity_update(x,v)
+			x = self.get_position_update(x,old_v,eta)
+			points.append(x)
+			self.method.update_state(self.function, x, old_x)
+		points = np.array(points)
+		return points, x
+            
+    def get_lipschitz_constant(self,function):
+        pass
+        
+    def __call__(self,function,x):
+        update_f = self.objective_f(function, x)
+        update_grad_f = self.objective_function(function, x)
+        gradient_descent = FirstOrder()
