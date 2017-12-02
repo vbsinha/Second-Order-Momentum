@@ -3,13 +3,14 @@ import numpy as np
 from plt import plot, plot_convergence_rate
 from functions.quadratic import QuadraticFunc
 from functions.ryanfunc import RyanFunc
+from functions.cubicregfunc import CubicRegFunc
 from functions.non_quadratic_func import NonQuadraticFunc
 from functions.examplefunc import ExampleFunc
 from gd import GradientDescent
 from step_sizes import *
 
 x = np.array([-3, 2])
-q = RyanFunc()
+q = CubicRegFunc()
 g_first = GradientDescent(q, methods.FirstOrder(), 'nesterov', 0)
 g_first_mom = GradientDescent(q, methods.FirstOrder(), 'nesterov', 0.9)
 g_second = GradientDescent(q, methods.SecondOrder(), 'nesterov', 0)
