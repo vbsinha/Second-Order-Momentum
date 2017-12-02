@@ -17,3 +17,7 @@ class Function:
     def __str__(self):
         print "WARNING : This function does not have a name"
         return "Function"
+        
+    def fstar(self):
+        print "WARNING: This function does not have a fstar defined"
+        return 0

@@ -1,3 +1,5 @@
+# Boyd's function
+
 from function import Function
 import numpy as np
         

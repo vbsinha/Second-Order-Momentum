@@ -41,7 +41,10 @@ class BFGS:
 	    grad = function.grad_f(x)
 	    s = x - old_x
 	    y = grad - old_grad
-	    I = np.diag([1]*len(y))
+	    I = np.diag([1]*len(y))	    
+	    if np.dot(y, s) < 1e-17:
+	        print "WARNING : BFGS Warning y.T * s is below 1e-17, updates to Hessian inverse stopped... "
+	        return
 	    lhs = I - np.outer(s, y)/np.dot(y, s) 
 	    rhs = I - np.outer(y, s)/np.dot(y, s)
 	    a = np.matmul(lhs, self.H)
@@ -64,7 +67,7 @@ class CubicRegularization:
         def update_f(y):
             result = np.dot(grad_f,y-x)
             result += 0.5*np.dot(np.dot(y-x,grad2_f),y-x)
-            result += L*np.power(np.linalg.norm(y-x),3)
+            result += L*np.power(np.linalg.norm(y-x),3)/6
             return result 
         return update_f
         
@@ -81,19 +84,19 @@ class CubicRegularization:
             return result 
         return update_grad_f 
         
-    def gradient_descent(self,start_x,num_iterations,step_size,function):
+    def gradient_descent(start_x,num_iterations,step_size,objective,grad_objective):
 		x = start_x
-		v = 0
+#		v = 0
 		points = [start_x]
 		method = FirstOrder()
 		for i in range(0,num_iterations):
-			old_v = v
-			old_x = x
+#			old_v = v
+#			old_x = x
 			eta = step_size(i,x,function,method)
-			v = self.get_velocity_update(x,v)
-			x = self.get_position_update(x,old_v,eta)
+			# v = self.get_velocity_update(x,v)
+			x = x - eta*grad_objective #self.get_position_update(x,old_v,eta)
 			points.append(x)
-			self.method.update_state(self.function, x, old_x)
+	#		self.method.update_state(self.function, x, old_x)
 		points = np.array(points)
 		return points, x
             
@@ -103,4 +106,4 @@ class CubicRegularization:
     def __call__(self,function,x):
         update_f = self.objective_f(function, x)
         update_grad_f = self.objective_function(function, x)
-        gradient_descent = FirstOrder()
+        p = gradient_descent(x,400,BacktrackingLineStep(0.5,0.5,10),update_f,update_grad_f)
