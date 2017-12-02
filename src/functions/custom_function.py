@@ -8,10 +8,10 @@ class CustomFunction(Function):
         self.grad_f = grad_f 
         if grad2_f != None:
             self.grad2_f = grad2_f
-        if f_star != None:
-            self.f_star = f_star
+        if fstar != None:
+            self.fstar = f_star
         if f_L != None:
-            self.f_L = f_L
+            self.L = f_L
         self.name = name
     
     def __str__(self):

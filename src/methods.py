@@ -55,6 +55,7 @@ class BFGS:
 class CubicRegularization:
     
     def __init__(self):
+        self.method = FirstOrder()
         pass 
         
     def update_state(self, function, x, old_x):
@@ -63,7 +64,7 @@ class CubicRegularization:
     def objective_f(self,function,x):
         grad_f = function.grad_f(x)
         grad2_f = function.grad2_f(x)
-        L = self.get_lipschitz_constant(function)
+        L = function.L()
         def update_f(y):
             result = np.dot(grad_f,y-x)
             result += 0.5*np.dot(np.dot(y-x,grad2_f),y-x)
@@ -74,7 +75,7 @@ class CubicRegularization:
     def objective_grad_f(self,function,x):
         grad_f = function.grad_f(x)
         grad2_f = function.grad2_f(x)
-        L = self.get_lipschitz_constant(function)
+        L = function.L()
         def update_grad_f(y):
             result = grad_f
             result -= np.matmul(grad2_f,x)
@@ -84,26 +85,25 @@ class CubicRegularization:
             return result 
         return update_grad_f 
         
-    def gradient_descent(start_x,num_iterations,step_size,objective,grad_objective):
+    def gradient_descent(self,start_x,num_iterations,step_size):
 		x = start_x
 #		v = 0
 		points = [start_x]
-		method = FirstOrder()
 		for i in range(0,num_iterations):
 #			old_v = v
-#			old_x = x
-			eta = step_size(i,x,function,method)
-			# v = self.get_velocity_update(x,v)
-			x = x - eta*grad_objective #self.get_position_update(x,old_v,eta)
+			old_x = x
+			eta = step_size(i,x,self.function,self.method)
+#			v = self.get_velocity_update(x,v)
+			x = x - self.function.grad_f(x) #self.get_position_update(x,old_v,eta)
 			points.append(x)
-	#		self.method.update_state(self.function, x, old_x)
+			self.method.update_state(self.function, x, old_x)
 		points = np.array(points)
 		return points, x
-            
-    def get_lipschitz_constant(self,function):
-        pass
         
     def __call__(self,function,x):
+        old_x = x
         update_f = self.objective_f(function, x)
         update_grad_f = self.objective_function(function, x)
-        p = gradient_descent(x,400,BacktrackingLineStep(0.5,0.5,10),update_f,update_grad_f)
+        self.function = CustomFunction(update_f,update_grad_f,name='Objective for Cubic Regularization')
+        points, new_x = gradient_descent(x,400,BacktrackingLineStep(0.5,0.5,10))
+        return new_x - old_x

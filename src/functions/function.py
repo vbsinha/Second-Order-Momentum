@@ -21,3 +21,7 @@ class Function:
     def fstar(self):
         print "WARNING: This function does not have a fstar defined"
         return 0
+        
+    def L(self):
+        print "WARNING: This function does not have L defined"
+        return 0
