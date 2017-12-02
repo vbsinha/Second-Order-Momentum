@@ -14,3 +14,12 @@ def plot(func, x_range, y_range, method_points):
     plt.title(str(func))  
     plt.legend()  
     plt.show()
+    
+def plot_convergence_rate(func, k_range, method_points):
+    k_min = k_range[0]
+    k_max = k_range[1]
+    assert k_max <= len(method_points), "Invalid range of iterations given"
+    assert k_min >= 0, "Negative value for iteration given"
+    for i in xrange(k_min,k_max):
+        
+        f_x = func.f(method_points)
