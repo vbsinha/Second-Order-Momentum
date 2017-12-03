@@ -1,5 +1,4 @@
 # RosenBrock function
-# Evaluate in range : [-4.5, 4.5]
 # Global mininma at (a, a**2)
 
 import numpy as np
