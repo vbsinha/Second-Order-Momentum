@@ -31,5 +31,6 @@ print "Minima achieved at for second order (without momentum) : ", x_second
 print "Minima achieved at for second order (with momentum) : ", x_second_mom
 print "Minima achieved at for bfgs (without momentum) : ", x_bfgs
 print "Minima achieved at for bfgs (with momentum) : ", x_bfgs_mom
-plot(q, [-4, 3], [-4, 3], [(points_first, "First order"), (points_first_mom, "First order with momentum"), (points_bfgs, "BFGS without momentum"), (points_bfgs_mom, "BFGS with momentum"),(points_second, "Second order"), (points_second_mom, "Second order with momentum"), ])
+print "Minima achieved at for Cubic Regularization (without momentum) : ", x_cr
+plot(q, [-4, 3], [-4, 3], [(points_first, "First order"), (points_first_mom, "First order with momentum"), (points_bfgs, "BFGS without momentum"), (points_bfgs_mom, "BFGS with momentum"),(points_second, "Second order"), (points_second_mom, "Second order with momentum"), (points_cr, "Cubic Regularization") ])
 #plot_convergence_rate(q, [0,100], [(points_first, "First order"), (points_first_mom, "First order with momentum"), (points_bfgs, "BFGS without momentum"), (points_bfgs_mom, "BFGS with momentum"),(points_second, "Second order"), (points_second_mom, "Second order with momentum"), ])

@@ -25,8 +25,8 @@ class CubicRegFunc(Function):
     def fstar(self):
         return 0
         
-    def l(self):
+    def L(self):
         return 2
         
     def __str__(self):
-        return "Ryan Function"
+        return "Cubic Reg Function"
