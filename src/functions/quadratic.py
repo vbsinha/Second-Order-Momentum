@@ -15,8 +15,7 @@ class QuadraticFunc(Function):
         
     def grad2_f(self, x):
         self.assert_dimensions(x,2)
-        print "ERROR: Hessian not implemented for quadratic function"
-        return np.array([[0, 0], [0, 0]])
+        return np.array([[2.5, 0.5], [0.5, 1.5]])
         
     def __str__(self):
         return "Quadratic Function"

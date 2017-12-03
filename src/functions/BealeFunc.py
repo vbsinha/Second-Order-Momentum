@@ -33,7 +33,7 @@ class BaeleFunc(Function):
         # grad2_f_x1_x2 = -1*second_term
         # grad2_f_x2_x1 = -1*second_term
         grad2_f_x2_x2 = 2*x[0]**2 + t2*2*x + 2*(2*x[0]*x[1])**2 + t3*3*2*x[0]*x[1] + 6*(x[1]**2*x[0])
-        return np.array([[grad2_f_x1_x1, -1*second_term], [-1*second_term, grad2_f_x2_x2]])
+        return np.array([[grad2_f_x1_x1, second_term], [second_term, grad2_f_x2_x2]])
         
     def fstar(self):
         return 0
