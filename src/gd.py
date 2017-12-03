@@ -50,9 +50,6 @@ class GradientDescent:
         for i in range(0,num_iterations):
     #        print "B"
             if np.fabs(self.function.f(x) - self.function.fstar()) < 1e-60:
-                print x
-                print self.function.f(x)
-                print self.function.fstar()
                 break
             old_v = v
             old_x = x

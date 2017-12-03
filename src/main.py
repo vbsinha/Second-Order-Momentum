@@ -10,13 +10,13 @@ from gd import GradientDescent
 from step_sizes import *
 
 x = np.array([-3, 2])
-q = QuadraticFunc()
+q = CubicRegFunc()
 g_first = GradientDescent(q, methods.FirstOrder())
-g_first_mom = GradientDescent(q, methods.FirstOrder(), 'momentum', 0.9)
+g_first_mom = GradientDescent(q, methods.FirstOrder(), 'nesterov', 0.9)
 g_second = GradientDescent(q, methods.SecondOrder())
-g_second_mom = GradientDescent(q, methods.SecondOrder(), 'momentum', 0.9)
+g_second_mom = GradientDescent(q, methods.SecondOrder(), 'nesterov', 0.9)
 g_bfgs = GradientDescent(q, methods.BFGS(np.identity(2)))
-g_bfgs_mom = GradientDescent(q, methods.BFGS(np.identity(2)), 'momentum', 0.9)
+g_bfgs_mom = GradientDescent(q, methods.BFGS(np.identity(2)), 'nesterov', 0.9)
 g_cr = GradientDescent(q, methods.CubicRegularization())
 points_first, x_first = g_first.gradient_descent(x, 100, BacktrackingLineStep(0.5,0.5,10))
 points_first_mom, x_first_mom = g_first_mom.gradient_descent(x, 100, BacktrackingLineStep(0.5,0.5,10))
