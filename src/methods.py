@@ -69,7 +69,6 @@ class CubicRegularization:
         grad2_f = function.grad2_f(x)
         L = function.L()
         def update_f(y):
-            print "y :",y,"x :",x
             result = np.dot(grad_f,y-x)
             result = result + 0.5*np.dot(np.dot(y-x,grad2_f),y-x)
             result = result + L*np.power(np.linalg.norm(y-x),3)/6
@@ -81,37 +80,24 @@ class CubicRegularization:
         grad2_f = function.grad2_f(x)
         L = function.L()
         def update_grad_f(y):
-    #        print "Arg:",y
             result = grad_f
-     #       print "R1:",result
             result = result - np.matmul(grad2_f,x)
-      #      print "R2:",result
             result = result + np.matmul(grad2_f,y)
-     #       print "R3:",result
             norm = np.linalg.norm(y-x) 
             result = result + L*norm*(y-x)
-    #        print "R4:",result
             return result 
         return update_grad_f 
         
     def gradient_descent(self,start_x,num_iterations,step_size):
         x = start_x
-  #      print "X: ",x
-#		v = 0
         points = [start_x]
         for i in range(0,num_iterations):
-#			old_v = v
             old_x = x
             eta = step_size(i,x,self.function,self.method)
-     #       print "eta:",eta
-#			v = self.get_velocity_update(x,v)
-    #        print "X1:",x
-#            print self.function.grad_f(x)
-            x = x - eta*self.function.grad_f(x) #self.get_position_update(x,old_v,eta)
-    #        print "X2:",x
+    #        print self.function.grad_f(x)
+            x = x - eta*self.function.grad_f(x)
             points.append(x)
             self.method.update_state(self.function, x, old_x)
-#        sys.exit(0)
         points = np.array(points)
         return points, x
         
@@ -120,5 +106,5 @@ class CubicRegularization:
         update_f = self.objective_f(function,x)
         update_grad_f = self.objective_grad_f(function,x)
         self.function = CustomFunction(update_f,update_grad_f,name='Objective for Cubic Regularization')
-        points, new_x = self.gradient_descent(x,400,FixedStep(0.0001))
+        points, new_x = self.gradient_descent(x,400,FixedStep(0.001))#BacktrackingLineStep(0.5,0.5,10))
         return new_x - old_x
