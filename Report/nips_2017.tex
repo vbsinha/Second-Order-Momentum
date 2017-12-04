@@ -26,10 +26,10 @@
 
 \author{
   Vaibhav Sinha \\
-  CS15BTECH11034
+  \texttt{cs15btech11034@iith.ac.in}
   \And
   Sukrut Rao \\
-  CS15VTECH11036
+  \texttt{cs15btech1036@iith.ac.in}
 }
 
 \begin{document}
@@ -37,35 +37,172 @@
 \maketitle
 
 \begin{abstract}
-  We study the effect of momentum on two second order methods - Newton's method and BFGS. We empirically determine the performance as compared to first order methods, with and without momentum, as well as Cubic Regularization. For applying momentum, we consider both the classical momentum and Nesterov's accelerated gradient.
+  We study the effect of momentum on two second order methods - Newton's method and BFGS. We empirically determine the performance as compared to gradient descent, with and without momentum, as well as Cubic Regularization. For applying momentum, we consider both the classical momentum and Nesterov's accelerated gradient.
 \end{abstract}
 
-\section{Project Objective}
+\section{Objective and Introduction}\label{introduction}
 
 To achieve faster convergence, second order methods were proposed over first order methods. Although second order methods have better theoretical bounds than first order methods and converge in very few steps, they are often not used in practice due to the cost of each step. To cope with these problems, two approaches have been proposed and well studied: (i) Adding momentum \cite{POLYAK19641,Sutskever} to first order methods to make the convergence speed comparable to second order methods, (ii) Quasi-Newton methods \citep{davidon,broyden1965class,nocedal1980updating} which avoid the costly computations involved in second order methods, with a small cost on the rate of convergence. In this project, we aim to combine both these approaches and attempt to verify if the classical second order methods as well as Quasi-Newton methods can be accelerated.
 
-\section{Novelty and Proposed Methodology}
+Momentum has been extensively studied on first order methods \citep{POLYAK19641,Sutskever}. However, there seems to be almost no work done on the effects of momentum on Newton’s method. Through this project we seek to address this problem. <Write about that paper>.
 
-Momentum has been extensively studied on first order methods \citep{POLYAK19641,Sutskever}. However, there seems to be almost no work done on the effects of momentum on Newton’s method. Through this project we seek to address this issue.
+We apply momentum to two methods - Newton's method and BFGS. We use both the classical momentum proposed by [] and Nesterov's accelerated gradient proposed by \citet{Sutskever}. A comparison of these approaches is made with gradient descent, gradient descent with momentum, and for some functions, with Cubic Regularization. We study the convergence rates empirically for five convex and five non-convex functions, mostly taken from various benchmarks.
 
-Moreover, to accelerate second order methods, several Quasi-Newton methods have been proposed including BFGS \citep{broyden1965class}, which was subsequently improved for memory performance by LBFGS \citep{nocedal1980updating}. We also plan to check the performance of momentum on BFGS/LBFGS and the Cubic regularized Newton method \citep{nesterov2006cubic}.
+The report is organized as follows. Section \ref{momentum} describes the two momentum methods and their update formulae. In Section \ref{methodology}, we describe our extension of the formulation of momentum for second order methods. Then, in Section \ref{opt}, we describe the methods used for optimization, such as gradient descent and BFGS. This is followed by description of the methods used for finding step sizes in Section \ref{step}. We list the functions used to empirically test our approach in Section \ref{functions}. The experiments conducted then follow in Section \ref{experiments}, and their results are described in Section \ref{results}. Based on these results, we provide our inferences subsequently in Section \ref{inferences}, and conclude in Section \ref{conclusion}.
 
-\subsection{Brief ideas}
+The code used in this project can be found in its GitHub repository at \url{https://github.com/vbsinha/Second-Order-Momentum}.
 
-For first order methods the momentum equation is given as,
+\section{Momentum}\label{momentum}
+
+The objective of momentum methods is to accelerate the descent towards the optimal value. This is done by taking a 'leap' in a direction slightly different from the immediate descent direction, with the hope that it will take the function closer to the optimal.
+Momentum was first proposed by [] in []. Subsequently, in 2013, usage of Nesterov's accelerated gradient for deep learning was proposed by \citet{Sutskever}, which gave good empirical results.
+
+The update step for gradient descent is given by
+\begin{equation}
+x^+ = x - \eta \nabla f(x)
+\end{equation}
+
+In general, with an optimization method that updates by $U$, the update step is given by
+\begin{equation}
+x^+ = x - \eta U
+\end{equation}
+
+With momentum, this update step is modified to include a velocity term, and the update depends on the relative weights given to the velocity direction and the descent direction, parameterized by a momentum parameter $\gamma$.
+
+\subsection{Classical Momentum}
+In this method, we introduce a velocity $v$, which is initialized with $0$. Then, the update step is given by
+\begin{align}
+v^+ &= \gamma v + (1-\gamma) \nabla f(x) \\
+x^+ &= x - \eta v^+
+\end{align}
+
+This can be visualized as:
+<image>
+
+\subsection{Nesterov's accelerated gradient}
+In this method, we have $\gamma$ and $v$ as before, and the update is given by
+\begin{align}
+v^+ &= \gamma v + (1-\gamma)x \\
+x^+ &= v^+ - \eta \nabla f(v^+)
+\end{align}
+
+This can be visualized as:
+<image>
+
+\section{Momentum for Second Order Methods}\label{methodology}
+
+We propose a simple and straightforward extension of the classical momentum and Nesterov's accelerated gradient for second order methods. We replace the $\nabla f(x)$ used in the existing formulations by $U(x)$, where $U$ is the update of the method under consideration. As described briefly in \label{opt}, $U(x)=\left(\nabla^2 f(x) \right)^{-1}\nabla f(x)$ for Newton's method and $U(x)=H \nabla f(x)$ for BFGS.
+
+The classical momentum update is now given by
 \begin{align*}
-v^{+} &= \gamma v + (1-\gamma) \nabla f(x) \\
+v^{+} &= \gamma v + (1-\gamma) U(x) \\
 x^{+} &= x - tv^{+}
 \end{align*}
 
-In a similar manner, we propose the momentum equation for second order methods,
+Similarly, the Nesterov's accelerated gradient update is now given by
+\begin{align}
+v^+ &= \gamma v + (1-\gamma)x \\
+x^+ &= v^+ - \eta U(v^+)
+\end{align}
 
-\begin{align*}
-v^{+} &= \gamma v + (1-\gamma) \nabla^2 f(x)^{-1} \nabla f(x) \\
-x^{+} &= x - tv^{+}
-\end{align*}
+\section{Optimization Methods}\label{opt}
+This section describes the optimization methods used in this project.
 
-Similarly, we will explore momentum for BFGS. We intend to study both the classical form of momentum \citep{POLYAK19641} as well as the one used in deep learning proposed by \citet{Sutskever}
+\subsection{Gradient Descent}
+This is a first order method, which updates the position $x$ to a scalar multiple of the direction of the steepest descent, given by the gradient of the function at $x$. As shown before, the update is given by
+\begin{equation}
+x^+ = x - \eta \nabla f(x)
+\end{equation}
+
+where $\eta > 0$ is a (small) constant.
+
+\subsection{Newton's Method}
+This is a second order method. The motivation behind this is to include the second order term in the Taylor approximation of the function to obtain the next step. The update is given by
+\begin{equation}
+x^+ = x - \eta \left(\nabla^2 f(x) \right)^{-1}\nabla f(x)
+\end{equation}
+
+A drawback of this method is that computing the inverse of the Hessian can be costly.
+
+\subsection{Broyden-Fletcher-Goldfarb-Shanno (BFGS) Update}
+This is a Quasi-Newton method. This provides a technique to approximate the inverse of the Hessian as used in Newton's method, with an objective of reducing the cost of computation.
+
+Let
+\begin{align}
+s &= x^+ - x \\
+y &= \nabla f(x^+) - \nabla f(x)
+\end{align}
+
+Then, the approximate of the inverse Hessian, $H$, is updated as follows
+\begin{equation}
+H^+ = \left(I - \frac{sy^T}{y^Ts}\right)H\left(I-\frac{ys^T}{y^Ts}\right)+\frac{ss^T}{y^Ts}
+\end{equation}
+
+The update is then given by
+\begin{equation}
+x^+ = x - \eta H \nabla f(x)
+\end{equation}
+
+\subsection{Cubic Regularization}
+This was proposed in []. TODO.
+
+\section{Step Sizes}\label{step}
+The choice of step size can greatly influence the rate of convergence. In our project, we consider two choices - using a fixed step size, and the popular step size found using backtracking line search. The step size is given by $\eta$, as used in the equations previously.
+
+\subsection{Fixed Step}
+In this, the value of $\eta$ is fixed. While it is a simple choice, it needs to be carefully chosen. A very small value will take a very large number of steps to converge, and a very large value will cause the step to overshoot the minimum, and sometimes result in divergence.
+
+\subsection{Backtracking Line Step}
+This is a method to adaptively select the step size. It is parameterized by $\alpha,\beta$, where $0<\alpha\le0.5$ and $0<\beta<1$. The step size is found iteratively. Initially, the step size $\eta$ is set to $1$. Then, while
+\begin{equation}
+f(x-\eta U) > f(x) - \alpha \eta \nabla f(x)^T U
+\end{equation}
+we update $\eta = \beta \eta$. Here, $U$ is the update based on the method used.
+
+This works well and is useful for computationally intensive methods like Newton's method, as it reduces the number of iterations needed.
+
+When using momentum, we replace $x$ and $U$ with values as prescribed by momentum update. So, in the case of classical momentum, we use $x$ and $v^+$, and in the case of Nesterov's accelerated gradient, we use $v^+$ and $U(v^+)$.
+
+\section{Functions Used}\label{functions}
+We now list the functions used to empirically test our approach. This consists of five convex and five non-convex functions, most of which are taken from benchmark functions for optimization problems.
+
+\subsection{Non-convex functions}
+
+\subsubsection{Beale Function}
+\begin{equation}
+f(x,y) = (1.5 - x + xy)^2 + (2.25 - x + xy^2)^2 + (2.625 - x + xy^3)^2	
+\end{equation}
+where $-4.5\le x,y \le 4.5$, $f(x^*)=0$.
+
+\subsubsection{Bird Function}
+\begin{equation}
+f(x,y) = \sin(x)e^{(1-\cos(y))^2} + \cos(y)e^{(1-\sin(x))^2} + (x-y)^2
+\end{equation}
+where $-2\pi \le x,y \le 2\pi$, $f(x^*)=-106.764537$.
+
+\subsubsection{Rosenbrock Function}
+\begin{equation}
+f(x,y) = (1-x)^2 + 100(y-x^2)^2
+\end{equation}
+where $f(x^*)=0$.
+
+\subsubsection{Levy13 Function}
+\begin{equation}
+f(x,y) = \sin^2(3\pi x) + (x-1)^2\left(1+\sin^2(3\pi y)\right) + (y-1)^2\left(1+\sin^2(2\pi y)\right)
+\end{equation}
+where $f(x^*)=0$.
+
+
+
+
+\section{Experiments}\label{experiments}
+
+\section{Results}\label{results}
+
+\section{Inferences}\label{inferences}
+
+\section{Conclusion}\label{conclusion}
+
 
 \section{Planned Experiments}
 
@@ -83,7 +220,9 @@ In other words, we compute
 for fixed values of $k$ and a set of functions $f$ for each class of methods.
 
 We expect to characterize the performance of using momentum with second order methods on a set of benchmark problems taken from \citep{jamil2013literature}, to enable a comparison with existing methods.
-
+http://infinity77.net/global\_optimization/test\_functions.html
+http://infinity77.net/global\_optimization/test\_functions.html
+http://infinity77.net/global\_optimization/test\_functions.html
 \bibliographystyle{unsrtnat}
 \bibliography{references}
 
