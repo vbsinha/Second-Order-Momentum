@@ -7,6 +7,8 @@ from functions.bealefunc import BealeFunc
 from functions.cubicregfunc import CubicRegFunc
 from functions.non_quadratic_func import NonQuadraticFunc
 from functions.examplefunc import ExampleFunc
+from functions.bird_function import BirdFunc
+from functions.levi_function import LevyFunc
 from gd import GradientDescent
 from step_sizes import *
 
