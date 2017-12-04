@@ -14,7 +14,7 @@ class DiminishingStep:
 		self.eta = eta
 		
 	def __call__(self,i,x,U,function):
-		return float(self.eta)/float(i)
+		return float(self.eta)/float(i+1)
 		
 class RangeDiminishingStep:
 	
@@ -42,7 +42,7 @@ class BacktrackingLineStep:
 		counter = 0
 		while counter < self.max_backtracks and lhs > rhs:
 			t = self.beta*t
-			lhs = function.f(x-t*grad_f)
+			lhs = function.f(x-t*U)
 			rhs = function.f(x) + self.alpha*t*np.dot(grad_f,-U)
 			counter += 1
 		return t
