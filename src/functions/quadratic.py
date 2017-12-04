@@ -19,3 +19,15 @@ class QuadraticFunc(Function):
         
     def __str__(self):
         return "Quadratic Function"
+        
+    def fstar(self):
+        return -1.76
+        
+    def levels(self):
+        return np.linspace(0, 20, 15)
+        
+    def domain(self):
+        return [[-4.5, 4.5],[-4.5, 4.5]]
+        
+    def start_x(self):
+        return np.array([4, 1])

@@ -35,10 +35,10 @@ class BiggsEXP2Func(Function):
         for i in range(1,11):
             t_i = 0.1*i
             y_i = exp(-t_i) - 5*exp(10*t_i)
-            result[0][0] += 2*power(t,2)*exp(-2*t*x) - 2*power(t,2)*exp(-t*x)*(a - exp(-t*x) + 5*exp(-t*y))
-            result[0][1] += -10*power(t,2)*exp(-t*x)*exp(-t*y)
-            result[1][0] += -10*power(t,2)*exp(-t*x)*exp(-t*y)
-            result[1][1] += 50*power(t,2)*exp(-2*t*y) + 10*power(t,2)*exp(-t*y)*(a - exp(-t*x) + 5*exp(-t*y))
+            result[0][0] += 2*power(t_i,2)*exp(-2*t_i*x) - 2*power(t_i,2)*exp(-t_i*x)*(y_i - exp(-t_i*x) + 5*exp(-t_i*y))
+            result[0][1] += -10*power(t_i,2)*exp(-t_i*x)*exp(-t_i*y)
+            result[1][0] += -10*power(t_i,2)*exp(-t_i*x)*exp(-t_i*y)
+            result[1][1] += 50*power(t_i,2)*exp(-2*t_i*y) + 10*power(t_i,2)*exp(-t_i*y)*(y_i - exp(-t_i*x) + 5*exp(-t_i*y))
         return result
         
     def fstar(self):

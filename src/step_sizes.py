@@ -14,7 +14,7 @@ class DiminishingStep:
 		self.eta = eta
 		
 	def __call__(self,i,x,U,function):
-		return float(self.eta)/float(i)
+		return float(self.eta)/float(i + 1)
 		
 class RangeDiminishingStep:
 	

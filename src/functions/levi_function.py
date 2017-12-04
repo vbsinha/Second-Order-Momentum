@@ -36,7 +36,13 @@ class LevyFunc(Function):
         return 0
         
     def domain(self):
-        return [[-10,10],[-10,10]]
+        return [[-3,4],[-3,4]]
+        
+    def levels(self):
+        return np.linspace(0, 20, 15)
+        
+    def start_x(self):
+        return np.array([2.2, 1])
         
     def __str__(self):
         return "Levy Function"
