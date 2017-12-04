@@ -56,8 +56,13 @@ class GradientDescent:
                 break
             old_v = v
             old_x = x
-            eta = step_size(i,x,self.function,self.method)
+       #     eta = step_size(i,x,self.function,self.method)
             v = self.get_velocity_update(x,v)
+            if self.momentum_function == 'momentum':
+                eta = step_size(i,x,v,self.function)
+            else:
+                v_method_update = self.method(self.function,v)
+                eta = step_size(i,v,v_method_update,self.function)
             x = self.get_position_update(x,old_v,eta)
             # print "V:",v
             points.append(x)

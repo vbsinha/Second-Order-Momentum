@@ -1,5 +1,6 @@
 from function import Function
 import numpy as np
+from numpy import exp,power
         
 class BiggsEXP2Func(Function):
     
@@ -26,16 +27,28 @@ class BiggsEXP2Func(Function):
         	result[1] += 2*f_i*derivative_2
         return result
         
-    def grad2_f(self, x):
-        self.assert_dimensions(x,2)
-        print "ERROR: Hessian not implemented for Biggs EXP2 function"
-        return np.array([[1, 1], [1, 1]])
+    def grad2_f(self, x_vec):
+        self.assert_dimensions(x_vec,2)
+        x = x_vec[0]
+        y = x_vec[1]
+        result = np.zeros((2,2))
+        for i in range(1,11):
+            t_i = 0.1*i
+            y_i = exp(-t_i) - 5*exp(10*t_i)
+            result[0][0] += 2*power(t,2)*exp(-2*t*x) - 2*power(t,2)*exp(-t*x)*(a - exp(-t*x) + 5*exp(-t*y))
+            result[0][1] += -10*power(t,2)*exp(-t*x)*exp(-t*y)
+            result[1][0] += -10*power(t,2)*exp(-t*x)*exp(-t*y)
+            result[1][1] += 50*power(t,2)*exp(-2*t*y) + 10*power(t,2)*exp(-t*y)*(a - exp(-t*x) + 5*exp(-t*y))
+        return result
+        
+    def fstar(self):
+        return 0
+        
+    def domain(self):
+        return [[0,20],[0,20]]
         
     def __str__(self):
         return "Biggs EXP2 Function"
-        
-    def domain(self):
-        return [[-20, 20], [-20, 20]]
         
     def levels(self):
         return np.linspace(0, 20, 15)
