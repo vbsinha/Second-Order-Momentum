@@ -13,7 +13,8 @@ from functions.biggs_exp2 import BiggsEXP2Func
 from gd import GradientDescent
 from step_sizes import *
 
-function_list = [BealeFunc(), BirdFunc(), LevyFunc(), RosenbrockFunc(), BiggsEXP2Func(), QuadraticFunc(), RyanFunc(), CubicRegFunc(), NonQuadraticFunc()]
+# function_list = [BealeFunc(), BirdFunc(), LevyFunc(), RosenbrockFunc(), BiggsEXP2Func(), QuadraticFunc(), RyanFunc(), CubicRegFunc(), NonQuadraticFunc()]
+function_list = [CubicRegFunc()]
 
 k_list = [0,5,10,20,50,100,250,500]
 
@@ -23,26 +24,29 @@ for objective in function_list:
     q = objective
     x = q.start_x()  
     g_first = GradientDescent(q, methods.FirstOrder())
-    g_first_mom = GradientDescent(q, methods.FirstOrder(), 'momentum', 0.9)
-    g_first_nest = GradientDescent(q, methods.FirstOrder(), 'nesterov', 0.9)
+    g_first_mom = GradientDescent(q, methods.FirstOrder(), 'momentum', 0.1)
+    g_first_nest = GradientDescent(q, methods.FirstOrder(), 'nesterov', 0.1)
     g_second = GradientDescent(q, methods.SecondOrder())
-    g_second_mom = GradientDescent(q, methods.SecondOrder(), 'momentum', 0.9)
-    g_second_nest = GradientDescent(q, methods.SecondOrder(), 'nesterov', 0.9)
+    g_second_mom = GradientDescent(q, methods.SecondOrder(), 'momentum', 0.1)
+    g_second_nest = GradientDescent(q, methods.SecondOrder(), 'nesterov', 0.1)
     g_bfgs = GradientDescent(q, methods.BFGS(np.identity(2)))
-    g_bfgs_mom = GradientDescent(q, methods.BFGS(np.identity(2)), 'momentum', 0.9)
-    g_bfgs_nest = GradientDescent(q, methods.BFGS(np.identity(2)), 'nesterov', 0.9)
+    g_bfgs_mom = GradientDescent(q, methods.BFGS(np.identity(2)), 'momentum', 0.1)
+    g_bfgs_nest = GradientDescent(q, methods.BFGS(np.identity(2)), 'nesterov', 0.1)
     # g_cr = GradientDescent(q, methods.CubicRegularization())
-    print x
+    # print x
+    print "Function : ", str(objective)
+    print "Start point : ", "[4, 1]"
     print "\\hline"
-    print "K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum"
+    print "K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\\\"
+    print "\\hline"
     for k in k_list:
         points_first, x_first = g_first.gradient_descent(x, k, FixedStep(0.1))
         points_first_mom, x_first_mom = g_first_mom.gradient_descent(x, k, FixedStep(0.1))
         points_first_nest, x_first_nest = g_first_nest.gradient_descent(x, k, FixedStep(0.1))
-        points_second, x_second = g_second.gradient_descent(x, k, BacktrackingLineStep(0.3,0.5,10))
-        points_second_mom, x_second_mom = g_second_mom.gradient_descent(x, k, FixedStep(0.3))
-        points_second_nest, x_second_nest = g_second_nest.gradient_descent(x, k, FixedStep(0.3))
-        points_bfgs, x_bfgs = g_bfgs.gradient_descent(x, k, BacktrackingLineStep(0.3,0.5,10))
+        points_second, x_second = g_second.gradient_descent(x, k, FixedStep(1))
+        points_second_mom, x_second_mom = g_second_mom.gradient_descent(x, k, FixedStep(1))
+        points_second_nest, x_second_nest = g_second_nest.gradient_descent(x, k, FixedStep(1))
+        points_bfgs, x_bfgs = g_bfgs.gradient_descent(x, k, FixedStep(0.1))
         points_bfgs_mom, x_bfgs_mom = g_bfgs_mom.gradient_descent(x, k, FixedStep(0.1))
         points_bfgs_nest, x_bfgs_nest = g_bfgs_mom.gradient_descent(x, k, FixedStep(0.1))
         # points_cr, x_cr = g_cr.gradient_descent(x, 100, FixedStep(-1))

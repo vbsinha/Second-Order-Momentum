@@ -46,7 +46,7 @@ class BFGS:
 	    y = grad - old_grad
 	    I = np.diag([1]*len(y))	    
 	    if np.dot(y, s) < 1e-17:
-	        print "WARNING : BFGS Warning y.T * s is below 1e-17, updates to Hessian inverse stopped... "
+	        # print "WARNING : BFGS Warning y.T * s is below 1e-17, updates to Hessian inverse stopped... "
 	        return
 	    lhs = I - np.outer(s, y)/np.dot(y, s) 
 	    rhs = I - np.outer(y, s)/np.dot(y, s)
