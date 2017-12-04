@@ -5,7 +5,7 @@ import numpy as np
 from function import Function
 
 
-class BaeleFunc(Function):
+class RosenbrockFunc(Function):
     
     def __init__(self, a=1, b=100):
         self.a = a
@@ -32,5 +32,5 @@ class BaeleFunc(Function):
         return 0
         
     def __str__(self):
-        return "RosenBrock Function"
+        return "Rosenbrock Function"
         
