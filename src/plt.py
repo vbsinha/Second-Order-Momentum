@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+epsilon = 1e-15
+
 def plot(func, x_range, y_range, method_points):
     r = np.linspace(x_range[0], x_range[1], 100)
     s = np.linspace(y_range[0], y_range[1], 100)
@@ -36,5 +38,5 @@ def plot_convergence_rate(func, k_range, method_points):
     plt.legend()
     plt.yscale('log')
     axes = plt.gca()
-    axes.set_ylim([1e-60,1e+8])
+    axes.set_ylim([epsilon,1e+8])
     plt.show()
