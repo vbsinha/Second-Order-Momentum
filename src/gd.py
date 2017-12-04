@@ -36,7 +36,6 @@ class GradientDescent:
         velocity_update = self.nesterov_velocity_update(x,v)
         update_before_momentum = self.get_update_before_momentum(velocity_update)
         update = velocity_update - eta*update_before_momentum
-        print "Velocity update : ", velocity_update
         return update
 		
     def get_velocity_update(self,x,v):
@@ -52,7 +51,7 @@ class GradientDescent:
    #     print "A"
         for i in range(0,num_iterations):
     #        print "B"
-            print x
+            # print x
             if np.fabs(self.function.f(x) - self.function.fstar()) < epsilon:
                 break
             old_v = v
@@ -60,7 +59,7 @@ class GradientDescent:
             eta = step_size(i,x,self.function,self.method)
             v = self.get_velocity_update(x,v)
             x = self.get_position_update(x,old_v,eta)
-            print "V:",v
+            # print "V:",v
             points.append(x)
             self.method.update_state(self.function, x, old_x) 
         points = np.array(points)

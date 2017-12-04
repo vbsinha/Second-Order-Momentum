@@ -25,3 +25,7 @@ class Function:
     def L(self):
         print "WARNING: This function does not have L defined"
         return 0
+        
+    def levels(self):
+        print "WARNING: This function does not have levels defined"
+        return np.np.linspace(0, 20, 15)
