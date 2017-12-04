@@ -25,3 +25,7 @@ class Function:
     def L(self):
         print "WARNING: This function does not have L defined"
         return 0
+        
+    def domain(self):
+        print "WARNING: This function does not have domain defined"
+        return [[-10,10],[-10,10]]

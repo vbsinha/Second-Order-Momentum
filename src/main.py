@@ -6,13 +6,15 @@ from functions.ryanfunc import RyanFunc
 from functions.cubicregfunc import CubicRegFunc
 from functions.non_quadratic_func import NonQuadraticFunc
 from functions.examplefunc import ExampleFunc
+from functions.bird_function import BirdFunc
+from functions.levi_function import LevyFunc
 from gd import GradientDescent
 from step_sizes import *
 
 epsilon = 1e-15
 
 x = np.array([-3, 2])
-q = RyanFunc()
+q = LevyFunc()
 g_first = GradientDescent(q, methods.FirstOrder())
 g_first_mom = GradientDescent(q, methods.FirstOrder(), 'nesterov', 0.1)
 g_second = GradientDescent(q, methods.SecondOrder())
@@ -27,13 +29,13 @@ points_second, x_second = g_second.gradient_descent(x, 100, BacktrackingLineStep
 points_second_mom, x_second_mom = g_second_mom.gradient_descent(x, 100, BacktrackingLineStep(0.5,0.5,10))
 points_bfgs, x_bfgs = g_bfgs.gradient_descent(x, 100, BacktrackingLineStep(0.5,0.5,10))
 points_bfgs_mom, x_bfgs_mom = g_bfgs.gradient_descent(x, 100, BacktrackingLineStep(0.5,0.5,10))
-points_cr, x_cr = g_cr.gradient_descent(x, 100, FixedStep(-1))
+#points_cr, x_cr = g_cr.gradient_descent(x, 100, FixedStep(-1))
 print "Minima achieved at (without momentum) : ", x_first
 print "Minima achieved at (with momentum) : ", x_first_mom
 print "Minima achieved at for second order (without momentum) : ", x_second
 print "Minima achieved at for second order (with momentum) : ", x_second_mom
 print "Minima achieved at for bfgs (without momentum) : ", x_bfgs
 print "Minima achieved at for bfgs (with momentum) : ", x_bfgs_mom
-print "Minima achieved at for Cubic Regularization (without momentum) : ", x_cr
-plot(q, [-4, 3], [-4, 3], [(points_first, "First order"), (points_first_mom, "First order with momentum"), (points_bfgs, "BFGS without momentum"), (points_bfgs_mom, "BFGS with momentum"),(points_second, "Second order"), (points_second_mom, "Second order with momentum"), (points_cr, "Cubic Regularization") ])
-plot_convergence_rate(q, [0,100], [(points_first, "First order"), (points_first_mom, "First order with momentum"), (points_bfgs, "BFGS without momentum"), (points_bfgs_mom, "BFGS with momentum"),(points_second, "Second order"), (points_second_mom, "Second order with momentum"), (points_cr, "Cubic Regularization")])
+#print "Minima achieved at for Cubic Regularization (without momentum) : ", x_cr
+plot(q, [-4, 3], [-4, 3], [(points_first, "First order"), (points_first_mom, "First order with momentum"), (points_bfgs, "BFGS without momentum"), (points_bfgs_mom, "BFGS with momentum"),(points_second, "Second order"), (points_second_mom, "Second order with momentum"),])# (points_cr, "Cubic Regularization") ])
+plot_convergence_rate(q, [0,100], [(points_first, "First order"), (points_first_mom, "First order with momentum"), (points_bfgs, "BFGS without momentum"), (points_bfgs_mom, "BFGS with momentum"),(points_second, "Second order"), (points_second_mom, "Second order with momentum"),])# (points_cr, "Cubic Regularization")])

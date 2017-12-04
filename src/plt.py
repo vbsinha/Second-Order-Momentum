@@ -10,7 +10,7 @@ def plot(func, x_range, y_range, method_points):
     Z = []
     for i in xrange(len(X)):
         Z.append(func.f(np.array([X[i], Y[i]])))
-    cp = plt.contour(X, Y, Z, levels=np.linspace(0, 500, 20), cmap=plt.cm.jet)
+    cp = plt.contour(X, Y, Z, 50)
     for points, l in method_points:
         plt.plot(points[:,0], points[:,1], label=l)
     plt.title(str(func))  
