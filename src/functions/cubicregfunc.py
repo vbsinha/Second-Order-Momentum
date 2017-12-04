@@ -30,3 +30,12 @@ class CubicRegFunc(Function):
         
     def __str__(self):
         return "Cubic Reg Function"
+        
+    def levels(self):
+        return np.linspace(0, 20, 15)
+        
+    def domain(self):
+        return [[-4.5, 4.5],[-4.5, 4.5]]
+        
+    def start_x(self):
+        return np.array([4, 1])

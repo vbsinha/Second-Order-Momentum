@@ -29,7 +29,13 @@ class BiggsEXP2Func(Function):
     def grad2_f(self, x):
         self.assert_dimensions(x,2)
         print "ERROR: Hessian not implemented for Biggs EXP2 function"
-        return np.array([[0, 0], [0, 0]])
+        return np.array([[1, 1], [1, 1]])
         
     def __str__(self):
         return "Biggs EXP2 Function"
+        
+    def domain(self):
+        return [[-20, 20], [-20, 20]]
+        
+    def levels(self):
+        return np.linspace(0, 20, 15)

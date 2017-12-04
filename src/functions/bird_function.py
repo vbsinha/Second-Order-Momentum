@@ -33,3 +33,12 @@ class BirdFunc(Function):
         
     def __str__(self):
         return "Bird Function"
+    
+    def domain(self):
+        return [[-6.28, 6.28],[-6.28, 6.28]]
+        
+    def levels(self):
+        return np.linspace(-90, 40, 15)
+        
+    def start_x(self):
+        return np.array([4, 1])

@@ -33,3 +33,7 @@ class Function:
     def domain(self):
         print "WARNING: This function does not have domain defined"
         return [[-10,10],[-10,10]]
+        
+    def start_x(self):
+        print "WARNING: This function does not have a start x"
+        return np.array([0, 0])
