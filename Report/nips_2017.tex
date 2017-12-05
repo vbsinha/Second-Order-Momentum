@@ -192,24 +192,35 @@ f(x,y) = \sin^2(3\pi x) + (x-1)^2\left(1+\sin^2(3\pi y)\right) + (y-1)^2\left(1+
 \end{equation}
 where $f(x^*)=0$.
 
+\subsection{Convex functions}
 
 
 
-\section{Experiments}\label{experiments}
 
-\section{Results}\label{results}
+\section{Methodology}\label{experiments}
 
-\section{Inferences}\label{inferences}
+\subsection{Experiments}
+We performed a range of experiments across methods, step sizes, and functions. The following are the methods we used for optimizing each function:
+\begin{enumerate}
+	\item Gradient Descent (First Order)
+	\item Gradient Descent with momentum
+	\item Gradient Descent with Nesterov momemtum
+	\item Newton's method (Second Order)
+	\item Newton's method with momentum 
+	\item Newton's method with Nesterov momentum
+	\item BFGS (Quasi-Newton method)
+	\item BFGS with momentum
+	\item BFGS with Nesterov momentum
+	\item Cubic Regularization (only for some functions)
+\end{enumerate}
 
-\section{Conclusion}\label{conclusion}
+We use Cubic Regularization only on some functions as it requires that the function be Lipschitz.
 
+We separately test on both fixed and backtracking step size. We choose the values of parameters for the step sizes for each method such that, roughly, they provide the best observed convergence rates.
 
-\section{Planned Experiments}
+Further, we also experiment over the choice of the parameter $\gamma$ when applying momentum, and observe the effect of its value on the convergence rates of some functions.
 
-We will compare the performance of first order methods, first order methods with momentum, and second order methods with our method. We plan to test on a range of benchmark problems collated by \citet{jamil2013literature}.
-
-\section{Performance Metrics and Expected Results}
-
+\subsection{Performance Metrics}
 A well performing optimization method is characterized by a high rate of convergence over a wide range of problems. The performance of different techniques can be compared by finding the distance from the optimum after a set of fixed, predefined number of iterations.
 
 In other words, we compute
@@ -219,7 +230,14 @@ In other words, we compute
 
 for fixed values of $k$ and a set of functions $f$ for each class of methods.
 
-We expect to characterize the performance of using momentum with second order methods on a set of benchmark problems taken from \citep{jamil2013literature}, to enable a comparison with existing methods.
+\section{Results}\label{results}
+
+\section{Inferences}\label{inferences}
+
+
+\section{Conclusion}\label{conclusion}
+
+
 http://infinity77.net/global\_optimization/test\_functions.html
 http://infinity77.net/global\_optimization/test\_functions.html
 http://infinity77.net/global\_optimization/test\_functions.html
