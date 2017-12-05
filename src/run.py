@@ -45,7 +45,7 @@ for objective in function_list:
         points_first_nest, x_first_nest = g_first_nest.gradient_descent(x, k, FixedStep(0.1))
         points_second, x_second = g_second.gradient_descent(x, k, FixedStep(1))
         points_second_mom, x_second_mom = g_second_mom.gradient_descent(x, k, FixedStep(1))
-        points_second_nest, x_second_nest = g_second_nest.gradient_descent(x, k, FixedStep(1))
+        points_second_nest, x_second_nest = g_second_nest.gradient_descent(x, k, FixedStep( 1))
         points_bfgs, x_bfgs = g_bfgs.gradient_descent(x, k, FixedStep(0.1))
         points_bfgs_mom, x_bfgs_mom = g_bfgs_mom.gradient_descent(x, k, FixedStep(0.1))
         points_bfgs_nest, x_bfgs_nest = g_bfgs_mom.gradient_descent(x, k, FixedStep(0.1))
