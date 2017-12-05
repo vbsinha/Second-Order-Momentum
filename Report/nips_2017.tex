@@ -172,7 +172,7 @@ This works well and is useful for computationally intensive methods like Newton'
 When using momentum, we replace $x$ and $U$ with values as prescribed by momentum update. So, in the case of classical momentum, we use $x$ and $v^+$, and in the case of Nesterov's accelerated gradient, we use $v^+$ and $U(v^+)$.
 
 \section{Functions Used}\label{functions}
-We now list the functions used to empirically test our approach. This consists of five convex and five non-convex functions, most of which are taken from benchmark functions for optimization problems.
+We now list the functions used to empirically test our approach. This consists of three convex and four non-convex functions, most of which are taken from benchmark functions for optimization problems.
 
 \subsection{Non-convex functions}
 
@@ -202,6 +202,23 @@ where $f(x^*)=0$.
 
 \subsection{Convex functions}
 
+\subsubsection{Quadratic function for cubic regularization}
+\begin{equation}
+f(x,y) = x^2 +y^2 + x^2y^2
+\end{equation}
+where $f(x^*) = 0$ for $x = (0,0)$
+
+\subsubsection{Quadratic Function}
+\begin{equation}
+f(x,y) = 1.125x^2 + 0.5xy + 0.75y^2 + 2x + 2y
+\end{equation}
+where $x* = (-0.64,-1.12)$
+
+\subsubsection{Sum of 2 convex functions (Ryan's function)}
+\begin{equation}
+f(x,y) = \frac{10x^2 + y^2}{2} + 5\log(1+\exp(-x-y))
+\end{equation}
+where $x* = (0.11246718,1.1246718)$
 
 
 
