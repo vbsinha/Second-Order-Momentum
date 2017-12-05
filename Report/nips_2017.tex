@@ -23,6 +23,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{grffile}
+\usepackage{float}
 
 \newtheorem{prop}{Proposition}
 
@@ -268,12 +269,432 @@ In this section we show the results that we obtain over the different functions.
 
 \subsubsection{Quadratic Function}
 
-\begin{figure}
-	\includegraphics[width=\linewidth]{"/home/vaibhav/P/OMML/Project/Images/quadratic_nesterov.png"}
-	\caption{Without Backtracking nesterov momentum}
-	\label{fig:Without Backtracking nesterov momentum}
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/quadraticnesterov.png}
+	\caption{Without Backtracking nesterov momentum for quadratic function}
+	\label{fig:Without Backtracking nesterov momentum for quadratic function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/quadraticnesterov1.png}
+	\caption{Without Backtracking nesterov momentum convergence for quadratic function}
+	\label{fig:Without Backtracking nesterov momentum convergence for quadratic function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/quadraticmomentum.png}
+	\caption{Without Backtracking, classical momentum for quadratic function}
+	\label{fig:Without Backtracking, classical momentum for quadratic function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/quadraticmomentum1.png}
+	\caption{Without Backtracking, classical momentum convergence for quadratic function}
+	\label{fig:Without Backtracking, classical momentum convergence for quadratic function}
+\end{figure}
+
+Tablulation of the results
+
+\begin{table}[H]
+	\centering
+	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
+	\label{Quadratic function table}
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		\hline
+		0 & 32.51 & 32.51 & 32.51 & 32.51 & 32.51 & 32.51 & 32.51 & 32.51 & 32.51 \\
+		\hline
+		5 & 1.83488760443 & 30.4213281907 & 1.42024644402 & 4.47092052269e-09 & 0.078588230042 & 0.00612038983306 & 0.0 & 5.54422894556 & 0.0276444510986 \\
+		\hline
+		10 & 0.104416851071 & 26.2639704 & 1.12046967677 & 0.0 & 11.1933485581 & 0.00240215250528 & 0.0 & 11.2703374208 & 11.2703374207 \\
+		\hline
+		20 & 0.000422535497722 & 16.8687382497 & 0.701451448022 & 0.0 & 3.77831090808 & 0.000370035642236 & 0.0 & 3.86204658547 & 3.86204658614 \\
+		\hline
+		50 & 3.17671151606e-08 & 2.55790786563 & 0.182776848416 & 0.0 & 0.128088386739 & 1.35260971801e-06 & 0.0 & 0.14454772597 & 0.14454772597 \\
+		\hline
+		100 & 5.06261699229e-14 & 0.0598453947193 & 0.025728800355 & 0.0 & 0.00026540080704 & 1.17324150395e-10 & 0.0 & 0.000454428901391 & 0.000454428901391 \\
+		\hline
+		250 & 8.881784197e-16 & 2.01789143026e-05 & 0.000362114757926 & 0.0 & 7.12108150225e-11 & 8.881784197e-16 & 0.0 & 1.21975762823e-11 & 1.21975762823e-11 \\
+		\hline
+		500 & 8.881784197e-16 & 1.41372653584e-08 & 6.62556551401e-07 & 0.0 & 6.66133814775e-16 & 8.881784197e-16 & 0.0 & 4.4408920985e-16 & 4.4408920985e-16 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/quadraticnesterovbacktrack.png}
+	\caption{Without Backtracking nesterov momentum for quadratic function}
+	\label{fig:With Backtracking nesterov momentum for quadratic function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/quadraticnesterovbacktrack1.png}
+	\caption{With Backtracking nesterov momentum convergence for quadratic function}
+	\label{fig:With Backtracking nesterov momentum convergence for quadratic function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/quadraticmomentumbacktrack.png}
+	\caption{With Backtracking, classical momentum}
+	\label{fig:With Backtracking, classical momentum for quadratic function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/quadraticmomentumbacktrack1.png}
+	\caption{With Backtracking, classical momentum convergence}
+	\label{fig:With Backtracking, classical momentum convergence for quadratic function}
+\end{figure}
+
+\subsection{Quadratic function for Cubic Regularization}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/cubicregularizationnesterov.png}
+	\caption{Without Backtracking nesterov momentum for cubic reg function}
+	\label{fig:Without Backtracking nesterov momentum for cubic reg function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/cubicregularizationnesterov1.png}
+	\caption{Without Backtracking nesterov momentum convergence for cubic reg function}
+	\label{fig:Without Backtracking nesterov momentum convergence for cubic reg function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/cubicregularizationmomentum.png}
+	\caption{Without Backtracking, classical momentum for cubic reg function}
+	\label{fig:Without Backtracking, classical momentum for cubic reg function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/cubicregularizationmomentum1.png}
+	\caption{Without Backtracking, classical momentum convergence for cubic reg function}
+	\label{fig:Without Backtracking, classical momentum convergence for cubic reg function}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
+	\label{Cubic Reg function table}
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		\hline
+		0 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 \\
+		\hline
+		5 & 0.207178568169 & 0.192945561247 & 0.385381702086 & 0.0 & 0.00017472184361 & 3.03257577329e-13 & 18.1426945535 & 8.22621443725 & 12.6728677096 \\
+		\hline
+		10 & 0.0189249942194 & 0.0177271522317 & 0.0519582128856 & 0.0 & 1.39378356901e-09 & 3.04420153376e-19 & 11.6616716415 & 3.08252056995 & 2.9563469538 \\
+		\hline
+		20 & 0.000214401076202 & 0.000174695536678 & 0.000979482935203 & 0.0 & 2.25230628224e-16 & 3.04420153376e-19 & 1.31429779534 & 2.31373817279 & 1.72317309359 \\
+		\hline
+		50 & 3.28502174709e-10 & 1.71253308781e-10 & 6.60405714177e-09 & 0.0 & 2.25230628224e-16 & 3.04420153376e-19 & 0.474053544794 & 1.05507575648 & 0.0199623701365 \\
+		\hline
+		100 & 7.86606433985e-16 & 6.69717027849e-16 & 8.41238253232e-16 & 0.0 & 2.25230628224e-16 & 3.04420153376e-19 & 1.79493932294e-05 & 3.15751385411e-06 & 2.43596417278e-07 \\
+		\hline
+		250 & 7.86606433985e-16 & 6.69717027849e-16 & 8.41238253232e-16 & 0.0 & 2.25230628224e-16 & 3.04420153376e-19 & 9.87467118907e-16 & 9.03603953911e-16 & 9.133245788e-16 \\
+		\hline
+		500 & 7.86606433985e-16 & 6.69717027849e-16 & 8.41238253232e-16 & 0.0 & 2.25230628224e-16 & 3.04420153376e-19 & 9.31929857482e-16 & 9.1290236807e-16 & 8.93617050072e-16 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/cubicregbacktrack.png}
+	\caption{Without Backtracking nesterov momentum for cubic reg function}
+	\label{fig:With Backtracking nesterov momentum for cubic reg function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/cubicregbacktrack1.png}
+	\caption{With Backtracking nesterov momentum convergence for cubic reg function}
+	\label{fig:With Backtracking nesterov momentum convergence for cubic reg function}
+\end{figure}
+
+\subsection{Ryan's function}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/ryannesterov.png}
+	\caption{Without Backtracking nesterov momentum for Ryan's function}
+	\label{fig:Without Backtracking nesterov momentum for Ryan's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/ryannesterov1.png}
+	\caption{Without Backtracking nesterov momentum convergence for Ryan's function}
+	\label{fig:Without Backtracking nesterov momentum convergence for Ryan's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/ryanmomentum.png}
+	\caption{Without Backtracking, classical momentum for Ryan's function}
+	\label{fig:Without Backtracking, classical momentum for Ryan's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/ryanmomentum1.png}
+	\caption{Without Backtracking, classical momentum convergence for Ryan's function}
+	\label{fig:Without Backtracking, classical momentum convergence for Ryan's function}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
+	\label{Ryan function table}
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		\hline
+		0 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 \\
+		\hline
+		5 & 26.6387051853 & 59.3706572848 & 1.10503601548 & 26.8301288454 & 59.3716768375 & 0.961340070709 & 0.0510965789433 & 20.2676047735 & 59.4739301724 \\
+		\hline
+		10 & 8.83773446207 & 29.556379987 & 1.07362255995 & 9.24724015765 & 29.616682555 & 0.8890897481 & 9.19141661989 & 29.6097223601 & 29.6778165357 \\
+		\hline
+		20 & 0.953807496995 & 0.740523436832 & 1.01566672188 & 1.13641410342 & 0.962901032676 & 0.761114751767 & 1.10658944728 & 0.928331092474 & 0.924191087229 \\
+		\hline
+		50 & 0.0219723951381 & 0.1382080052 & 0.871976790423 & 0.00261433670185 & 0.562524389156 & 0.480188570345 & 0.00198073756067 & 0.15542464648 & 0.245313310944 \\
+		\hline
+		100 & 0.00340118855447 & 0.00227856317275 & 0.696306962495 & 3.45298589277e-07 & 0.0017678449992 & 0.225539316909 & 5.26480008478e-08 & 0.000673974437733 & 0.000699752481859 \\
+		\hline
+		250 & 1.49411726011e-05 & 3.89295969905e-07 & 0.381876514351 & 2.22044604925e-16 & 2.63991273286e-10 & 0.0236855937018 & 6.66133814775e-16 & 3.36410677093e-10 & 3.36655148203e-10 \\
+		\hline
+		500 & 1.80343495693e-09 & 4.28723723189e-12 & 0.147433134809 & 2.22044604925e-16 & 2.22044604925e-16 & 0.000531242621821 & 6.66133814775e-16 & -8.881784197e-16 & 2.22044604925e-16 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/ryanbacktrack.png}
+	\caption{Without Backtracking nesterov momentum for Ryan's function}
+	\label{fig:With Backtracking nesterov momentum for Ryan's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/ryanbacktrack1.png}
+	\caption{With Backtracking nesterov momentum convergence for Ryan's function}
+	\label{fig:With Backtracking nesterov momentum convergence for Ryan's function}
 \end{figure}
 		
+\subsection{Non-Convex Functions}
+
+\subsubsection{Rosebrock's function}
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/rosenbrocknesterov.png}
+	\caption{Without Backtracking nesterov momentum for Rosenbrock's function}
+	\label{fig:Without Backtracking nesterov momentum for Rosenbrock's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/rosenbrocknesterov1.png}
+	\caption{Without Backtracking nesterov momentum convergence for Rosenbrock's function}
+	\label{fig:Without Backtracking nesterov momentum convergence for Rosenbrock's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/rosenbrockmomentum1.png}
+	\caption{Without Backtracking, classical momentum convergence for Rosenbrock's function}
+	\label{fig:Without Backtracking, classical momentum convergence for Rosenbrock's function}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
+	\label{Rosenbrock's function table}
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		\hline
+		0 & 101 & 101 & 101 & 101 & 101 & 101 & 101 & 101 & 101 \\
+		\hline
+		5 & 69.8295564443 & 57.6966474622 & 3.82200292515 & 8.1576534659e-24 & 1.06507867936 & 0.69198970811 & 45.0969746328 & 75.1131026283 & 100.956710474 \\
+		\hline
+		10 & 64.4391473282 & 14.9530996098 & 3.08656898455 & 8.1576534659e-24 & 35.2521965914 & 0.750166839318 & 100.799375378 & 100.916213851 & 100.917258096 \\
+		\hline
+		20 & 25.4689355047 & 1.89906390048 & 2.04899370795 & 8.1576534659e-24 & 13.3167896093 & 1.1668345106 & 100.600759091 & 100.758325106 & 100.758325104 \\
+		\hline
+		50 & 1.1481213865 & 0.564314609197 & 0.795766395323 & 8.1576534659e-24 & 11667137.311 & 0.325626070328 & 100.004884002 & 100.181875336 & 100.181875328 \\
+		\hline
+		100 & 0.222202397945 & 0.488198084746 & 0.486811828373 & 8.1576534659e-24 & 116263.79539 & 5.21979401992e-06 & 99.01966932 & 99.1949313611 & 99.194931346 \\
+		\hline
+		250 & 0.207554227477 & 0.46476169885 & 0.447290924877 & 8.1576534659e-24 & 4879335.96641 & 7.21298310498e-16 & 96.1224528149 & 96.2899621219 & 96.2899620758 \\
+		\hline
+		500 & 0.186484509912 & 0.427957666478 & 0.417950808313 & 8.1576534659e-24 & 35898.2835888 & 7.21298310498e-16 & 91.4827794386 & 91.6380329422 & 91.6380328617 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/rosenbrockbacktrack.png}
+	\caption{Without Backtracking nesterov momentum for Rosenbrock's function}
+	\label{fig:With Backtracking nesterov momentum for Rosenbrock's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/rosenbrockbacktrack1.png}
+	\caption{With Backtracking nesterov momentum convergence for Rosenbrock's function}
+	\label{fig:With Backtracking nesterov momentum convergence for Rosenbrock's function}
+\end{figure}
+
+\subsubsection{Beale's function}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/baelenesterov.png}
+	\caption{Without Backtracking nesterov momentum for Beale's function}
+	\label{fig:Without Backtracking nesterov momentum for Beale's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/baelenesterov1.png}
+	\caption{Without Backtracking nesterov momentum convergence for Beale's function}
+	\label{fig:Without Backtracking nesterov momentum convergence for Beale's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/baelemomentum.png}
+	\caption{Without Backtracking classical momentum for Beale's function}
+	\label{fig:Without Backtracking classical momentum for Beale's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/baelemomentum1.png}
+	\caption{Without Backtracking, classical momentum convergence for Beale's function}
+	\label{fig:Without Backtracking, classical momentum convergence for Beale's function}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
+	\label{Beale's function table}
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		\hline
+		0 & 14.203125 & 14.203125 & 14.203125 & 14.203125 & 14.203125 & 14.203125 & 14.203125 & 14.203125 & 14.203125 \\
+		\hline
+		5 & 0.214192786949 & 4.0506352598 & 8.29392955926 & 14.203125 & 14.203125 & 0.793205833941 & 11.5664148639 & 0.988284903126 & 11.4643553302 \\
+		\hline
+		10 & 0.0377043270104 & 5.26279156331 & 7.85032555106 & 14.203125 & 14.203125 & 0.431824466527 & 9.07937503436 & 12.4899170441 & 7.28051336173 \\
+		\hline
+		20 & 0.0370790753767 & 1.74144285607 & 7.0314348265 & 14.203125 & 14.203125 & 0.195360257225 & 2.88314992696 & 286.229765594 & 1.49853211142 \\
+		\hline 
+		50 & 0.0352171352983 & 0.0482153194914 & 5.06625605447 & 14.203125 & 14.203125 & 0.0211724771849 & 9.27028304638 & 0.27364042821 & 0.219267167413 \\
+		\hline 
+		100 & 0.0321675470274 & 0.0101902099634 & 3.04944806045 & 14.203125 & 14.203125 & 0.000358188039061 & 31641529.664 & 0.204857586988 & 0.49299188239 \\
+		\hline
+		250 & 0.023572799569 & 0.00568745886959 & 1.04565831272 & 14.203125 & 14.203125 & 4.34565476483e-10 & 13.0337014688 & 0.305346319815 & 8.95808064061 \\
+		\hline
+		500 & 0.0120312232665 & 0.00188903024737 & 0.353368551931 & 14.203125 & 14.203125 & 9.45439730683e-16 & 13.0247733854 & 0.389099818506 & 0.0964089241617 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection{Bird's function}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/birdnesterov.png}
+	\caption{Without Backtracking nesterov momentum for Bird's function}
+	\label{fig:Without Backtracking nesterov momentum for Bird's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/birdnesterov1.png}
+	\caption{Without Backtracking nesterov momentum convergence for Bird's function}
+	\label{fig:Without Backtracking nesterov momentum convergence for Bird's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/birdmomentum.png}
+	\caption{Without Backtracking classical momentum for Bird's function}
+	\label{fig:Without Backtracking classical momentum for Bird's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/birdmomentum1.png}
+	\caption{Without Backtracking, classical momentum convergence for Bird's function}
+	\label{fig:Without Backtracking, classical momentum convergence for Bird's function}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
+	\label{Bird's function table}
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		\hline
+		0 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 \\
+		\hline
+		5 & 120.305736318 & 124.579650117 & 108.687729472 & 119.121355283 & 123.940202042 & 108.401840092 & 124.496097995 & 125.477906466 & 124.873334518 \\
+		\hline
+		10 & 116.74745792 & 120.922394066 & 108.687447082 & 115.838121836 & 119.659198742 & 108.390435607 & 124.927085653 & 120.49707774 & 120.49707774 \\
+		\hline
+		20 & 112.81210899 & 114.799986638 & 108.686882451 & 159.228300637 & 114.050035675 & 108.358887319 & 121.092433034 & 102.870110207 & 102.870110207 \\
+		\hline
+		50 & 105.720137607 & 108.187696235 & 108.685189753 & 157.280824928 & 109.488172026 & 108.301385369 & 122.571054572 & 53.6099039615 & 110.140713919 \\
+		\hline
+		100 & 2.59221043564e-05 & 82.5026199412 & 108.682372502 & 157.277994852 & 109.264863682 & 108.267213504 & 124.468053574 & 62.8155500575 & 62.8155500575 \\
+		\hline
+		250 & 2.50735297413e-07 & 9.53885182753e-06 & 108.673949071 & 157.277994777 & 109.25761723 & 108.252217522 & 109.884076803 & 27.930927023 & 207060.188575 \\
+		\hline
+		500 & 2.50735297413e-07 & 2.50735311624e-07 & 108.6600002 & 157.277994777 & 109.257617227 & 108.251560324 & 14.1370093194 & 114.81179003 & 118.692122326 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection{Levy's function}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/levynesterov.png}
+	\caption{Without Backtracking nesterov momentum for Levy's function}
+	\label{fig:Without Backtracking nesterov momentum for Levy's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/levynesterov1.png}
+	\caption{Without Backtracking nesterov momentum convergence for Levy's function}
+	\label{fig:Without Backtracking nesterov momentum convergence for Levy's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/levymomentum.png}
+	\caption{Without Backtracking classical momentum for Levy's function}
+	\label{fig:Without Backtracking classical momentum for Levy's function}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/levymomentum1.png}
+	\caption{Without Backtracking, classical momentum convergence for Levy's function}
+	\label{fig:Without Backtracking, classical momentum convergence for Levy's function}
+\end{figure}	
+
+\begin{table}[H]
+	\centering
+	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
+	\label{Levy's function table}
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		\hline
+		0 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 \\
+		\hline
+		5 & 1.76177608496 & 2.03458372589 & 1.53947357194 & 2.37669234777 & 2.37640512406 & 3.63622533624 & 1.79626394425 & 2.03458372589 & 2.03458372589 \\
+		\hline
+		10 & 1.75801668076 & 1.97268418339 & 1.49040538352 & 2.37669234777 & 2.36423466801 & 3.63860022831 & 2.33666327709 & 1.8790139651 & 2.34209282967 \\
+		\hline
+		20 & 1.75785604419 & 1.83748911208 & 1.42828321306 & 2.37669234777 & 2.37272458089 & 3.63869179026 & 2.32711274457 & 2.33708538967 & 2.33708538967 \\
+		\hline
+		50 & 2.71128708258 & 1.76079965147 & 1.42663269139 & 2.37669234777 & 2.3765462934 & 3.63869423866 & 9.94765708545 & 2.31360658591 & 2.31360658591 \\
+		\hline
+		100 & 2.61073339217 & 1.75787704019 & 1.42663264956 & 2.37669234777 & 2.37669193667 & 3.63869423868 & 2.2201498711 & 2.24556306129 & 2.24556306129 \\
+		\hline
+		250 & 2.61073275262 & 1.75785578319 & 1.42663264956 & 2.37669234777 & 2.37669234777 & 3.63869423868 & 1.76209470788 & 2.25803979174 & 1.77110181172 \\
+		\hline
+		500 & 2.61073275262 & 1.75785578319 & 1.42663264956 & 2.37669234777 & 2.37669234777 & 3.63869423868 & 1.75787351578 & 3.95539173908 & 1.7578980313 \\
+		\hline
+	\end{tabular}
+\end{table}
+
 \section{Observations and Inferences}\label{inferences}
 <Explain individual tables/graphs here>
 
