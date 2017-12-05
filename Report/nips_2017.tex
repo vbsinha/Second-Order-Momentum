@@ -265,6 +265,8 @@ for fixed values of $k$ and a set of functions $f$ for each class of methods.
 \section{Results}\label{results}
 In this section we show the results that we obtain over the different functions. We begin with convex functions and then show non convex functions.
 
+For each function, contour plots are shown that characterize the paths taken by each method. Log-scale plots of the convergence rates for each of the methods are also provided, where the value of $f-f^*$ is plotted against $k$. For each function, a table of results shows the values of $f-f^*$ for certain fixed values of $k$.
+
 \subsection{Convex Functions}
 
 \subsubsection{Quadratic Function}
@@ -696,20 +698,43 @@ Tablulation of the results
 \end{table}
 
 \section{Observations and Inferences}\label{inferences}
-<Explain individual tables/graphs here>
+We now describe our observations and inferences based on the results of our experiments.
 
-Based on our findings, we make the following propositions:
+We first analyze the results on using backtracking line search. The results can be observed in figures \ref{fig:With Backtracking nesterov momentum convergence for quadratic function}, \ref{fig:With Backtracking, classical momentum convergence for quadratic function},
+\ref{fig:With Backtracking nesterov momentum convergence for cubic reg function},
+\ref{fig:With Backtracking nesterov momentum convergence for Ryan's function},
+\ref{fig:With Backtracking nesterov momentum convergence for Rosenbrock's function}. We observe that with backtracking line search, in every single case, using either momentum or Nesterov momentum performs worse than without any acceleration. This leads us to believe that using momentum might not be a good choice along with a backtracking step.
 
 \begin{prop}
 	Both momentum and Nesterov's momentum decrease the performance of every method if the the step size is chosen using backtracking line search.
 \end{prop}
 
-\begin{prop}
-	Both momentum and Nesterov's momentum decrease the performance of Newton's method. 
-\end{prop}
+Next, we look at the performance of momentum and Nesterov momentum when used with Newton's method. For momentum, the results can be visualized in figures \ref{fig:Without Backtracking, classical momentum convergence for quadratic function},
+\ref{fig:Without Backtracking, classical momentum convergence for cubic reg function},
+\ref{fig:Without Backtracking, classical momentum convergence for Ryan's function},
+\ref{fig:Without Backtracking, classical momentum convergence for Rosenbrock's function},
+\ref{fig:Without Backtracking, classical momentum convergence for Beale's function}. Similarly, for Nesterov Momentum, the results can be seen in figures \ref{fig:Without Backtracking nesterov momentum convergence for quadratic function},
+\ref{fig:Without Backtracking nesterov momentum convergence for cubic reg function},
+\ref{fig:Without Backtracking nesterov momentum convergence for Ryan's function},
+\ref{fig:Without Backtracking nesterov momentum convergence for Rosenbrock's function},
+\ref{fig:Without Backtracking nesterov momentum convergence for Beale's function}. In \ref{fig:Without Backtracking, classical momentum convergence for Beale's function} and \ref{fig:Without Backtracking nesterov momentum convergence for Beale's function}, which correspond to the Beale Function, we observe that Newton's method with momentum and Nesterov's momentum performs better than all other methods. However, in all other cases, using acceleration with Newton's method is always worse than without. This suggests that the existing formulation of momentum is not suitable for Newton's method.
 
 \begin{prop}
-	Momentum and Nesterov's momentum perform comparable - in some cases better, in some cases worse - than optimization without using them, when used on BFGS.
+	Both momentum and Nesterov momentum appear to, in most cases to decrease the performance of Newton's method. 
+\end{prop}
+
+We next analyze the performance of acceleration on BFGS. The results with Nesterov momentum can again be seen in	figures \ref{fig:Without Backtracking nesterov momentum convergence for quadratic function},
+\ref{fig:Without Backtracking nesterov momentum convergence for cubic reg function},
+\ref{fig:Without Backtracking nesterov momentum convergence for Ryan's function},
+\ref{fig:Without Backtracking nesterov momentum convergence for Rosenbrock's function},
+\ref{fig:Without Backtracking nesterov momentum convergence for Beale's function}, and with classical momentum can be seen in \ref{fig:Without Backtracking, classical momentum convergence for quadratic function},
+\ref{fig:Without Backtracking, classical momentum convergence for cubic reg function},
+\ref{fig:Without Backtracking, classical momentum convergence for Ryan's function},
+\ref{fig:Without Backtracking, classical momentum convergence for Rosenbrock's function},
+\ref{fig:Without Backtracking, classical momentum convergence for Beale's function}. We observe differences in behaviour with different functions. In \ref{fig:Without Backtracking, classical momentum convergence for quadratic function}, \ref{fig:Without Backtracking, classical momentum convergence for Beale's function}, \ref{fig:Without Backtracking nesterov momentum convergence for Rosenbrock's function}, and \ref{fig:Without Backtracking nesterov momentum convergence for Beale's function}, we observe that on the log-scale plot, the performance of BFGS with and without acceleration is very similar. In \ref{fig:Without Backtracking, classical momentum convergence for cubic reg function}, \ref{fig:Without Backtracking, classical momentum convergence for Rosenbrock's function}, and \ref{fig:Without Backtracking nesterov momentum convergence for cubic reg function}, use of acceleration significantly improves the performance of BFGS. However, in \ref{fig:Without Backtracking, classical momentum convergence for Ryan's function}, \ref{fig:Without Backtracking nesterov momentum convergence for quadratic function}, and \ref{fig:Without Backtracking nesterov momentum convergence for Ryan's function}, BFGS without acceleration performs better than BFGS with acceleration. We see that even for non-convex functions, BFGS performs comparably well with and without acceleration. Using acceleration for BFGS thus appears to be a promising direction for future work, and needs to be investigated further.
+
+\begin{prop}
+	Momentum and Nesterov momentum perform comparable - in some cases better, in some cases worse - than optimization without using them, when used on BFGS.
 \end{prop}
 
 
