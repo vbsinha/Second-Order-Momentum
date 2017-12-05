@@ -24,6 +24,8 @@
 \usepackage{graphicx}
 \usepackage{grffile}
 
+\newtheorem{prop}{Proposition}
+
 \title{Second Order Momentum}
 
 \author{
@@ -31,7 +33,7 @@
   \texttt{cs15btech11034@iith.ac.in}
   \And
   Sukrut Rao \\
-  \texttt{cs15btech1036@iith.ac.in}
+  \texttt{cs15btech11036@iith.ac.in}
 }
 
 \begin{document}
@@ -56,7 +58,8 @@ The code used in this project can be found in its GitHub repository at \url{http
 
 \section{Momentum}\label{momentum}
 
-The objective of momentum methods is to accelerate the descent towards the optimal value. This is done by taking a 'leap' in a direction slightly different from the immediate descent direction, with the hope that it will take the function closer to the optimal.
+The objective of momentum methods is to accelerate the descent towards the optimal value. It 'damps' the gradient descent when close to the optimal, that allows the use of higher learning rates while avoiding overshooting the point of minimum.
+
 Momentum was first proposed by [] in []. Subsequently, in 2013, usage of Nesterov's accelerated gradient for deep learning was proposed by \citet{Sutskever}, which gave good empirical results.
 
 The update step for gradient descent is given by
@@ -78,8 +81,7 @@ v^+ &= \gamma v + (1-\gamma) \nabla f(x) \\
 x^+ &= x - \eta v^+
 \end{align}
 
-This can be visualized as:
-<image>
+This will be referred to as just 'momentum' subsequently in this report, when clear from the context.
 
 \subsection{Nesterov's accelerated gradient}
 In this method, we have $\gamma$ and $v$ as before, and the update is given by
@@ -88,8 +90,8 @@ v^+ &= \gamma v + (1-\gamma)x \\
 x^+ &= v^+ - \eta \nabla f(v^+)
 \end{align}
 
-This can be visualized as:
-<image>
+This will be referred to as 'Nesterov momentum' subsequently in this report, when clear from the context.
+
 
 \section{Momentum for Second Order Methods}\label{methodology}
 
@@ -101,7 +103,7 @@ v^{+} &= \gamma v + (1-\gamma) U(x) \\
 x^{+} &= x - tv^{+}
 \end{align*}
 
-Similarly, the Nesterov's accelerated gradient update is now given by
+Similarly, the Nesterov momentum update is now given by
 \begin{align}
 v^+ &= \gamma v + (1-\gamma)x \\
 x^+ &= v^+ - \eta U(v^+)
@@ -171,7 +173,9 @@ we update $\eta = \beta \eta$. Here, $U$ is the update based on the method used.
 
 This works well and is useful for computationally intensive methods like Newton's method, as it reduces the number of iterations needed.
 
-When using momentum, we replace $x$ and $U$ with values as prescribed by momentum update. So, in the case of classical momentum, we use $x$ and $v^+$, and in the case of Nesterov's accelerated gradient, we use $v^+$ and $U(v^+)$.
+When using momentum, we replace $x$ and $U$ with values as prescribed by momentum update. So, in the case of classical momentum, we use $x$ and $v^+$, and in the case of Nesterov momentum, we use $v^+$ and $U(v^+)$.
+
+It can be observed that we perform backtracking line search on the momentum update, and not the regular update, to find $\eta$. This is because if we use the regular update, the value of $\eta$ obtained will be a 'good' value assuming we are descending based on the regular update. Since the update includes a momentum term, we perform backtracking line search taking that into account. Nevertheless, we performed experiments in both cases - (i) performing backtracking line search on the update after momentum, and (ii) performing backtracking line search on the update before momentum. We observed across all functions and both momentum types, (ii) performed significantly better than (i), and hence we use that in our study.
 
 \section{Functions Used}\label{functions}
 We now list the functions used to empirically test our approach. This consists of three convex and four non-convex functions, most of which are taken from benchmark functions for optimization problems.
@@ -241,7 +245,7 @@ We performed a range of experiments across methods, step sizes, and functions. T
 	\item Cubic Regularization (only for some functions)
 \end{enumerate}
 
-We use Cubic Regularization only on some functions as it requires that the function be Lipschitz.
+We use Cubic Regularization only on some functions as it requires that the Hessian of the function be Lipschitz, with a known Lipschitz constant $L$.
 
 We separately test on both fixed and backtracking step size. We choose the values of parameters for the step sizes for each method such that, roughly, they provide the best observed convergence rates.
 
@@ -270,13 +274,34 @@ In this section we show the results that we obtain over the different functions.
 	\label{fig:Without Backtracking nesterov momentum}
 \end{figure}
 		
+\section{Observations and Inferences}\label{inferences}
+<Explain individual tables/graphs here>
+
+Based on our findings, we make the following propositions:
+
+\begin{prop}
+	Both momentum and Nesterov's momentum decrease the performance of every method if the the step size is chosen using backtracking line search.
+\end{prop}
+
+\begin{prop}
+	Both momentum and Nesterov's momentum decrease the performance of Newton's method. 
+\end{prop}
+
+\begin{prop}
+	Momentum and Nesterov's momentum perform comparable - in some cases better, in some cases worse - than optimization without using them, when used on BFGS.
+\end{prop}
 
 
-\section{Inferences}\label{inferences}
+\subsection{Limitations}
+Our experiments test over a very small set of benchmark functions. It is quite possible that our results and conclusions are biased due to the choice of functions, and that momentum for second order methods performs much better for a different set of functions. However, we believe that this might not be the case, as the functions were chosen with the intent of having as diverse a set of properties among them as possible
 
 
 \section{Conclusion}\label{conclusion}
+Based on our experiments, it appears that momentum degrades the performance of Newton's method. There is no clear advantage on using momentum for BFGS. We also observe that momentum performs poorly, even for gradient descent, when used with backtracking line search.
 
+Momentum for first order methods is based on the intuitive idea of damping gradient descent, which allowed the step sizes to be increased. Over the past many decades, strong convergence guarantees have been proven for using momentum. Nesterov's momentum, proposed in 2013 by \citet{Sutskever}, has performed very well for deep learning. In the case of second order methods, an alternative, more intuitive formulation for acceleration might be required, that can exploit the assumptions made in these methods naturally, as opposed to direct application of the first order formulation.
+
+<Cubic Reg>
 
 http://infinity77.net/global\_optimization/test\_functions.html
 http://infinity77.net/global\_optimization/test\_functions.html
