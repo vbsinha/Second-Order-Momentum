@@ -21,6 +21,8 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 \usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{grffile}
 
 \title{Second Order Momentum}
 
@@ -91,7 +93,7 @@ This can be visualized as:
 
 \section{Momentum for Second Order Methods}\label{methodology}
 
-We propose a simple and straightforward extension of the classical momentum and Nesterov's accelerated gradient for second order methods. We replace the $\nabla f(x)$ used in the existing formulations by $U(x)$, where $U$ is the update of the method under consideration. As described briefly in \label{opt}, $U(x)=\left(\nabla^2 f(x) \right)^{-1}\nabla f(x)$ for Newton's method and $U(x)=H \nabla f(x)$ for BFGS.
+We propose a simple and straightforward extension of the classical momentum and Nesterov's accelerated gradient for second order methods. We replace the $\nabla f(x)$ used in the existing formulations by $U(x)$, where $U$ is the update of the method under consideration. As described briefly in \ref{opt}, $U(x)=\left(\nabla^2 f(x) \right)^{-1}\nabla f(x)$ for Newton's method and $U(x)=H \nabla f(x)$ for BFGS.
 
 The classical momentum update is now given by
 \begin{align*}
@@ -256,7 +258,18 @@ In other words, we compute
 for fixed values of $k$ and a set of functions $f$ for each class of methods.
 
 \section{Results}\label{results}
+In this section we show the results that we obtain over the different functions. We begin with convex functions and then show non convex functions.
 
+\subsection{Convex Functions}
+
+\subsubsection{Quadratic Function}
+
+\begin{figure}
+	\includegraphics[width=\linewidth]{"/home/vaibhav/P/OMML/Project/Images/quadratic_nesterov.png"}
+	\caption{Without Backtracking nesterov momentum}
+	\label{fig:Without Backtracking nesterov momentum}
+\end{figure}
+		
 
 
 \section{Inferences}\label{inferences}
