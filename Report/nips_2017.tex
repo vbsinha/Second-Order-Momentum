@@ -24,6 +24,7 @@
 \usepackage{graphicx}
 \usepackage{grffile}
 \usepackage{float}
+\usepackage{tabularx}
 
 \newtheorem{prop}{Proposition}
 
@@ -51,7 +52,7 @@ To achieve faster convergence, second order methods were proposed over first ord
 
 Momentum has been extensively studied on first order methods \citep{POLYAK19641,Sutskever}. However, there seems to be almost no work done on the effects of momentum on Newton’s method. Through this project we seek to address this problem. <Write about that paper>.
 
-We apply momentum to two methods - Newton's method and BFGS. We use both the classical momentum proposed by [] and Nesterov's accelerated gradient proposed by \citet{Sutskever}. A comparison of these approaches is made with gradient descent, gradient descent with momentum, and for some functions, with Cubic Regularization. We study the convergence rates empirically for five convex and five non-convex functions, mostly taken from various benchmarks.
+We apply momentum to two methods - Newton's method and BFGS. We use both the classical momentum proposed by [] and Nesterov's accelerated gradient proposed by \citet{Sutskever}. A comparison of these approaches is made with gradient descent, gradient descent with momentum, and for some functions, with Cubic Regularization. We study the convergence rates empirically for three convex and four non-convex functions, mostly taken from various benchmarks.
 
 The report is organized as follows. Section \ref{momentum} describes the two momentum methods and their update formulae. In Section \ref{methodology}, we describe our extension of the formulation of momentum for second order methods. Then, in Section \ref{opt}, we describe the methods used for optimization, such as gradient descent and BFGS. This is followed by description of the methods used for finding step sizes in Section \ref{step}. We list the functions used to empirically test our approach in Section \ref{functions}. The experiments conducted then follow in Section \ref{experiments}, and their results are described in Section \ref{results}. Based on these results, we provide our inferences subsequently in Section \ref{inferences}, and conclude in Section \ref{conclusion}.
 
@@ -149,7 +150,7 @@ x^+ = x - \eta H \nabla f(x)
 \end{equation}
 
 \subsection{Cubic Regularization}
-This was proposed in []. Cubic Regularization builds up on Netwon's method. Networn'a method obtains $x^+$ as:
+This was proposed in []. Cubic Regularization builds up on Netwon's method. Netwon'a method obtains $x^+$ as:
 \begin{equation}
 	x^+ = argmin_y f(x) + \nabla f(x)^T (y-x) + \frac12 (y-x)^T \nabla^2 (y-x)
 \end{equation}
@@ -199,7 +200,7 @@ where $-2\pi \le x,y \le 2\pi$, $f(x^*)=-106.764537$.
 \begin{equation}
 f(x,y) = (1-x)^2 + 100(y-x^2)^2
 \end{equation}
-where $f(x^*)=0$.
+where $f(x^*)=0$ at $x*=(1,1)$.
 
 \subsubsection{Levy13 Function}
 \begin{equation}
@@ -213,7 +214,7 @@ where $f(x^*)=0$.
 \begin{equation}
 f(x,y) = x^2 +y^2 + x^2y^2
 \end{equation}
-where $f(x^*) = 0$ for $x = (0,0)$
+where $f(x^*) = 0$ for $x^* = (0,0)$
 
 \subsubsection{Quadratic Function}
 \begin{equation}
@@ -299,32 +300,32 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Quadratic function table}
-	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
 		\hline
-		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
 		0 & 32.51 & 32.51 & 32.51 & 32.51 & 32.51 & 32.51 & 32.51 & 32.51 & 32.51 \\
 		\hline
-		5 & 1.83488760443 & 30.4213281907 & 1.42024644402 & 4.47092052269e-09 & 0.078588230042 & 0.00612038983306 & 0.0 & 5.54422894556 & 0.0276444510986 \\
+		5 & 1.83 & 30.42 & 1.420 & 4.470e-09 & 0.0785 & 0.00612 & 0.0 & 5.544 & 0.0276 \\
 		\hline
-		10 & 0.104416851071 & 26.2639704 & 1.12046967677 & 0.0 & 11.1933485581 & 0.00240215250528 & 0.0 & 11.2703374208 & 11.2703374207 \\
+		10 & 0.104 & 26.263 & 1.120 & 0.0 & 11.193 & 0.00240 & 0.0 & 11.270 & 11.270 \\
 		\hline
-		20 & 0.000422535497722 & 16.8687382497 & 0.701451448022 & 0.0 & 3.77831090808 & 0.000370035642236 & 0.0 & 3.86204658547 & 3.86204658614 \\
+		20 & 0.000422 & 16.8687 & 0.7014 & 0.0 & 3.7783 & 0.00037 & 0.0 & 3.862 & 3.862 \\
 		\hline
-		50 & 3.17671151606e-08 & 2.55790786563 & 0.182776848416 & 0.0 & 0.128088386739 & 1.35260971801e-06 & 0.0 & 0.14454772597 & 0.14454772597 \\
+		50 & 3.176e-08 & 2.55 & 0.182 & 0.0 & 0.128 & 1.352e-06 & 0.0 & 0.144 & 0.144 \\
 		\hline
-		100 & 5.06261699229e-14 & 0.0598453947193 & 0.025728800355 & 0.0 & 0.00026540080704 & 1.17324150395e-10 & 0.0 & 0.000454428901391 & 0.000454428901391 \\
+		100 & 5.062e-14 & 0.0598 & 0.0257 & 0.0 & 0.000265 & 1.173e-10 & 0.0 & 0.000454 & 0.000454 \\
 		\hline
-		250 & 8.881784197e-16 & 2.01789143026e-05 & 0.000362114757926 & 0.0 & 7.12108150225e-11 & 8.881784197e-16 & 0.0 & 1.21975762823e-11 & 1.21975762823e-11 \\
+		250 & 8.881e-16 & 2.0178e-05 & 0.0003621 & 0.0 & 7.121e-11 & 8.881e-16 & 0.0 & 1.219e-11 & 1.219e-11 \\
 		\hline
-		500 & 8.881784197e-16 & 1.41372653584e-08 & 6.62556551401e-07 & 0.0 & 6.66133814775e-16 & 8.881784197e-16 & 0.0 & 4.4408920985e-16 & 4.4408920985e-16 \\
+		500 & 8.881e-16 & 1.413e-08 & 6.625e-07 & 0.0 & 6.661e-16 & 8.881e-16 & 0.0 & 4.440e-16 & 4.440e-16 \\
 		\hline
 	\end{tabular}
 \end{table}
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../Images/quadraticnesterovbacktrack.png}
-	\caption{Without Backtracking nesterov momentum for quadratic function}
+	\caption{With Backtracking nesterov momentum for quadratic function}
 	\label{fig:With Backtracking nesterov momentum for quadratic function}
 \end{figure}
 
@@ -376,32 +377,32 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Cubic Reg function table}
-	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
 		\hline
-		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
 		0 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 \\
 		\hline
-		5 & 0.207178568169 & 0.192945561247 & 0.385381702086 & 0.0 & 0.00017472184361 & 3.03257577329e-13 & 18.1426945535 & 8.22621443725 & 12.6728677096 \\
+		5 & 0.207 & 0.192 & 0.385 & 0.0 & 0.000174 & 3.0325e-13 & 18.1426 & 8.2262 & 12.672 \\
 		\hline
-		10 & 0.0189249942194 & 0.0177271522317 & 0.0519582128856 & 0.0 & 1.39378356901e-09 & 3.04420153376e-19 & 11.6616716415 & 3.08252056995 & 2.9563469538 \\
+		10 & 0.0189 & 0.0177 & 0.0519 & 0.0 & 1.393e-09 & 3.044e-19 & 11.661 & 3.0825 & 2.956 \\
 		\hline
-		20 & 0.000214401076202 & 0.000174695536678 & 0.000979482935203 & 0.0 & 2.25230628224e-16 & 3.04420153376e-19 & 1.31429779534 & 2.31373817279 & 1.72317309359 \\
+		20 & 0.000214 & 0.000174 & 0.000979 & 0.0 & 2.252e-16 & 3.044e-19 & 1.3142 & 2.313 & 1.723 \\
 		\hline
-		50 & 3.28502174709e-10 & 1.71253308781e-10 & 6.60405714177e-09 & 0.0 & 2.25230628224e-16 & 3.04420153376e-19 & 0.474053544794 & 1.05507575648 & 0.0199623701365 \\
+		50 & 3.285e-10 & 1.712e-10 & 6.604e-09 & 0.0 & 2.252e-16 & 3.044e-19 & 0.474 & 1.055 & 0.0199 \\
 		\hline
-		100 & 7.86606433985e-16 & 6.69717027849e-16 & 8.41238253232e-16 & 0.0 & 2.25230628224e-16 & 3.04420153376e-19 & 1.79493932294e-05 & 3.15751385411e-06 & 2.43596417278e-07 \\
+		100 & 7.866e-16 & 6.697e-16 & 8.412e-16 & 0.0 & 2.252e-16 & 3.044e-19 & 1.794e-05 & 3.157e-06 & 2.435e-07 \\
 		\hline
-		250 & 7.86606433985e-16 & 6.69717027849e-16 & 8.41238253232e-16 & 0.0 & 2.25230628224e-16 & 3.04420153376e-19 & 9.87467118907e-16 & 9.03603953911e-16 & 9.133245788e-16 \\
+		250 & 7.866e-16 & 6.697e-16 & 8.412e-16 & 0.0 & 2.252e-16 & 3.044e-19 & 9.874e-16 & 9.036e-16 & 9.133e-16 \\
 		\hline
-		500 & 7.86606433985e-16 & 6.69717027849e-16 & 8.41238253232e-16 & 0.0 & 2.25230628224e-16 & 3.04420153376e-19 & 9.31929857482e-16 & 9.1290236807e-16 & 8.93617050072e-16 \\
+		500 & 7.866e-16 & 6.697e-16 & 8.412e-16 & 0.0 & 2.252e-16 & 3.044e-19 & 9.319e-16 & 9.129e-16 & 8.936e-16 \\
 		\hline
 	\end{tabular}
 \end{table}
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../Images/cubicregbacktrack.png}
-	\caption{Without Backtracking nesterov momentum for cubic reg function}
+	\caption{With Backtracking nesterov momentum for cubic reg function}
 	\label{fig:With Backtracking nesterov momentum for cubic reg function}
 \end{figure}
 
@@ -441,32 +442,32 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Ryan function table}
-	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
 		\hline
-		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
-		0 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 & 78.0638511678 \\
+		0 & 78.0638 & 78.0638 & 78.0638 & 78.0638 & 78.0638 & 78.0638 & 78.0638 & 78.0638 & 78.0638 \\
 		\hline
-		5 & 26.6387051853 & 59.3706572848 & 1.10503601548 & 26.8301288454 & 59.3716768375 & 0.961340070709 & 0.0510965789433 & 20.2676047735 & 59.4739301724 \\
+		5 & 26.638 & 59.370 & 1.105 & 26.830 & 59.371 & 0.961 & 0.0510 & 20.267 & 59.473 \\
 		\hline
-		10 & 8.83773446207 & 29.556379987 & 1.07362255995 & 9.24724015765 & 29.616682555 & 0.8890897481 & 9.19141661989 & 29.6097223601 & 29.6778165357 \\
+		10 & 8.837 & 29.556 & 1.073 & 9.247 & 29.616 & 0.88 & 9.191 & 29.609 & 29.677 \\
 		\hline
-		20 & 0.953807496995 & 0.740523436832 & 1.01566672188 & 1.13641410342 & 0.962901032676 & 0.761114751767 & 1.10658944728 & 0.928331092474 & 0.924191087229 \\
+		20 & 0.953 & 0.740 & 1.0156 & 1.136 & 0.962 & 0.761 & 1.106 & 0.928 & 0.924 \\
 		\hline
-		50 & 0.0219723951381 & 0.1382080052 & 0.871976790423 & 0.00261433670185 & 0.562524389156 & 0.480188570345 & 0.00198073756067 & 0.15542464648 & 0.245313310944 \\
+		50 & 0.0219 & 0.138 & 0.87197 & 0.00261 & 0.562 & 0.480 & 0.00198 & 0.155 & 0.245 \\
 		\hline
-		100 & 0.00340118855447 & 0.00227856317275 & 0.696306962495 & 3.45298589277e-07 & 0.0017678449992 & 0.225539316909 & 5.26480008478e-08 & 0.000673974437733 & 0.000699752481859 \\
+		100 & 0.00340 & 0.00227 & 0.696 & 3.452e-07 & 0.00176 & 0.225 & 5.264e-08 & 0.000673 & 0.000699 \\
 		\hline
-		250 & 1.49411726011e-05 & 3.89295969905e-07 & 0.381876514351 & 2.22044604925e-16 & 2.63991273286e-10 & 0.0236855937018 & 6.66133814775e-16 & 3.36410677093e-10 & 3.36655148203e-10 \\
+		250 & 1.494e-05 & 3.892e-07 & 0.381 & 2.220e-16 & 2.639e-10 & 0.0236 & 6.661e-16 & 3.364e-10 & 3.366e-10 \\
 		\hline
-		500 & 1.80343495693e-09 & 4.28723723189e-12 & 0.147433134809 & 2.22044604925e-16 & 2.22044604925e-16 & 0.000531242621821 & 6.66133814775e-16 & -8.881784197e-16 & 2.22044604925e-16 \\
+		500 & 1.803e-09 & 4.287e-12 & 0.147 & 2.220e-16 & 2.220e-16 & 0.000531 & 6.661e-16 & -8.881e-16 & 2.220e-16 \\
 		\hline
 	\end{tabular}
 \end{table}
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../Images/ryanbacktrack.png}
-	\caption{Without Backtracking nesterov momentum for Ryan's function}
+	\caption{With Backtracking nesterov momentum for Ryan's function}
 	\label{fig:With Backtracking nesterov momentum for Ryan's function}
 \end{figure}
 
@@ -501,32 +502,32 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Rosenbrock's function table}
-	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
 		\hline
-		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
 		0 & 101 & 101 & 101 & 101 & 101 & 101 & 101 & 101 & 101 \\
 		\hline
-		5 & 69.8295564443 & 57.6966474622 & 3.82200292515 & 8.1576534659e-24 & 1.06507867936 & 0.69198970811 & 45.0969746328 & 75.1131026283 & 100.956710474 \\
+		5 & 69.829 & 57.696 & 3.822 & 8.157e-24 & 1.065 & 0.691 & 45.096 & 75.113 & 100.956 \\
 		\hline
-		10 & 64.4391473282 & 14.9530996098 & 3.08656898455 & 8.1576534659e-24 & 35.2521965914 & 0.750166839318 & 100.799375378 & 100.916213851 & 100.917258096 \\
+		10 & 64.439 & 14.953 & 3.086 & 8.157e-24 & 35.252 & 0.750 & 100.799 & 100.916 & 100.917 \\
 		\hline
-		20 & 25.4689355047 & 1.89906390048 & 2.04899370795 & 8.1576534659e-24 & 13.3167896093 & 1.1668345106 & 100.600759091 & 100.758325106 & 100.758325104 \\
+		20 & 25.468 & 1.899 & 2.048 & 8.157e-24 & 13.316 & 1.166 & 100.600 & 100.758 & 100.758 \\
 		\hline
-		50 & 1.1481213865 & 0.564314609197 & 0.795766395323 & 8.1576534659e-24 & 11667137.311 & 0.325626070328 & 100.004884002 & 100.181875336 & 100.181875328 \\
+		50 & 1.148 & 0.564 & 0.795 & 8.157e-24 & 11667137.311 & 0.325 & 100.004 & 100.181 & 100.181 \\
 		\hline
-		100 & 0.222202397945 & 0.488198084746 & 0.486811828373 & 8.1576534659e-24 & 116263.79539 & 5.21979401992e-06 & 99.01966932 & 99.1949313611 & 99.194931346 \\
+		100 & 0.222 & 0.488 & 0.486 & 8.157e-24 & 116263.795 & 5.219e-06 & 99.019 & 99.194 & 99.194 \\
 		\hline
-		250 & 0.207554227477 & 0.46476169885 & 0.447290924877 & 8.1576534659e-24 & 4879335.96641 & 7.21298310498e-16 & 96.1224528149 & 96.2899621219 & 96.2899620758 \\
+		250 & 0.207 & 0.464 & 0.447 & 8.157e-24 & 4879335.966 & 7.212e-16 & 96.122 & 96.289 & 96.289 \\
 		\hline
-		500 & 0.186484509912 & 0.427957666478 & 0.417950808313 & 8.1576534659e-24 & 35898.2835888 & 7.21298310498e-16 & 91.4827794386 & 91.6380329422 & 91.6380328617 \\
+		500 & 0.186 & 0.427 & 0.417 & 8.157e-24 & 35898.283 & 7.212e-16 & 91.482 & 91.638 & 91.638 \\
 		\hline
 	\end{tabular}
 \end{table}
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../Images/rosenbrockbacktrack.png}
-	\caption{Without Backtracking nesterov momentum for Rosenbrock's function}
+	\caption{With Backtracking nesterov momentum for Rosenbrock's function}
 	\label{fig:With Backtracking nesterov momentum for Rosenbrock's function}
 \end{figure}
 
@@ -566,25 +567,25 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Beale's function table}
-	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
 		\hline
-		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
 		0 & 14.203125 & 14.203125 & 14.203125 & 14.203125 & 14.203125 & 14.203125 & 14.203125 & 14.203125 & 14.203125 \\
 		\hline
-		5 & 0.214192786949 & 4.0506352598 & 8.29392955926 & 14.203125 & 14.203125 & 0.793205833941 & 11.5664148639 & 0.988284903126 & 11.4643553302 \\
+		5 & 0.214 & 4.050 & 8.293 & 14.203 & 14.203 & 0.793 & 11.566 & 0.988 & 11.464 \\
 		\hline
-		10 & 0.0377043270104 & 5.26279156331 & 7.85032555106 & 14.203125 & 14.203125 & 0.431824466527 & 9.07937503436 & 12.4899170441 & 7.28051336173 \\
+		10 & 0.0377 & 5.262 & 7.850 & 14.203 & 14.203 & 0.431 & 9.079 & 12.489 & 7.280 \\
 		\hline
-		20 & 0.0370790753767 & 1.74144285607 & 7.0314348265 & 14.203125 & 14.203125 & 0.195360257225 & 2.88314992696 & 286.229765594 & 1.49853211142 \\
+		20 & 0.037 & 1.741 & 7.0314 & 14.203 & 14.203 & 0.195 & 2.883 & 286.229 & 1.498 \\
 		\hline 
-		50 & 0.0352171352983 & 0.0482153194914 & 5.06625605447 & 14.203125 & 14.203125 & 0.0211724771849 & 9.27028304638 & 0.27364042821 & 0.219267167413 \\
+		50 & 0.0352 & 0.0482 & 5.0662 & 14.203 & 14.203 & 0.021 & 9.270 & 0.273 & 0.219 \\
 		\hline 
-		100 & 0.0321675470274 & 0.0101902099634 & 3.04944806045 & 14.203125 & 14.203125 & 0.000358188039061 & 31641529.664 & 0.204857586988 & 0.49299188239 \\
+		100 & 0.0321 & 0.0101 & 3.0494 & 14.203 & 14.203 & 0.000358 & 31641529.664 & 0.204 & 0.4929 \\
 		\hline
-		250 & 0.023572799569 & 0.00568745886959 & 1.04565831272 & 14.203125 & 14.203125 & 4.34565476483e-10 & 13.0337014688 & 0.305346319815 & 8.95808064061 \\
+		250 & 0.0235 & 0.00568 & 1.0456 & 14.203 & 14.203 & 4.345e-10 & 13.033 & 0.305 & 8.958 \\
 		\hline
-		500 & 0.0120312232665 & 0.00188903024737 & 0.353368551931 & 14.203125 & 14.203125 & 9.45439730683e-16 & 13.0247733854 & 0.389099818506 & 0.0964089241617 \\
+		500 & 0.012 & 0.00188 & 0.353 & 14.203 & 14.203 & 9.454e-16 & 13.024 & 0.389 & 0.0964 \\
 		\hline
 	\end{tabular}
 \end{table}
@@ -619,25 +620,25 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Bird's function table}
-	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
 		\hline
-		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
-		0 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 & 126.660714373 \\
+		0 & 126.660714373 & 126.660714 & 126.660714 & 126.660714 & 126.660714 & 126.660714 & 126.660714 & 126.660714 & 126.660714 \\
 		\hline
-		5 & 120.305736318 & 124.579650117 & 108.687729472 & 119.121355283 & 123.940202042 & 108.401840092 & 124.496097995 & 125.477906466 & 124.873334518 \\
+		5 & 120.305 & 124.579 & 108.687 & 119.121 & 123.940 & 108.401 & 124.496 & 125.477 & 124.873 \\
 		\hline
-		10 & 116.74745792 & 120.922394066 & 108.687447082 & 115.838121836 & 119.659198742 & 108.390435607 & 124.927085653 & 120.49707774 & 120.49707774 \\
+		10 & 116.747 & 120.922 & 108.687 & 115.838 & 119.659 & 108.390 & 124.927 & 120.497 & 120.497 \\
 		\hline
-		20 & 112.81210899 & 114.799986638 & 108.686882451 & 159.228300637 & 114.050035675 & 108.358887319 & 121.092433034 & 102.870110207 & 102.870110207 \\
+		20 & 112.812 & 114.799 & 108.686 & 159.228 & 114.050 & 108.358 & 121.092 & 102.870 & 102.870 \\
 		\hline
-		50 & 105.720137607 & 108.187696235 & 108.685189753 & 157.280824928 & 109.488172026 & 108.301385369 & 122.571054572 & 53.6099039615 & 110.140713919 \\
+		50 & 105.720 & 108.187 & 108.685 & 157.280 & 109.488 & 108.301 & 122.571 & 53.609 & 110.140 \\
 		\hline
-		100 & 2.59221043564e-05 & 82.5026199412 & 108.682372502 & 157.277994852 & 109.264863682 & 108.267213504 & 124.468053574 & 62.8155500575 & 62.8155500575 \\
+		100 & 2.592e-05 & 82.502 & 108.682 & 157.277 & 109.264 & 108.267 & 124.468 & 62.815 & 62.815 \\
 		\hline
-		250 & 2.50735297413e-07 & 9.53885182753e-06 & 108.673949071 & 157.277994777 & 109.25761723 & 108.252217522 & 109.884076803 & 27.930927023 & 207060.188575 \\
+		250 & 2.507e-07 & 9.538e-06 & 108.673 & 157.277 & 109.257 & 108.252 & 109.884 & 27.930 & 207060.188 \\
 		\hline
-		500 & 2.50735297413e-07 & 2.50735311624e-07 & 108.6600002 & 157.277994777 & 109.257617227 & 108.251560324 & 14.1370093194 & 114.81179003 & 118.692122326 \\
+		500 & 2.507e-07 & 2.507e-07 & 108.660 & 157.277 & 109.257 & 108.251 & 14.137 & 114.811 & 118.692 \\
 		\hline
 	\end{tabular}
 \end{table}
@@ -672,25 +673,25 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Levy's function table}
-	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
 		\hline
-		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Momentum with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
+		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
-		0 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 & 2.34450849719 \\
+		0 & 2.344 & 2.344 & 2.344 & 2.344 & 2.34450849719 & 2.344 & 2.344 & 2.34450849719 & 2.344 \\
 		\hline
-		5 & 1.76177608496 & 2.03458372589 & 1.53947357194 & 2.37669234777 & 2.37640512406 & 3.63622533624 & 1.79626394425 & 2.03458372589 & 2.03458372589 \\
+		5 & 1.761 & 2.0345 & 1.539 & 2.376 & 2.376 & 3.636 & 1.796 & 2.034 & 2.034 \\
 		\hline
-		10 & 1.75801668076 & 1.97268418339 & 1.49040538352 & 2.37669234777 & 2.36423466801 & 3.63860022831 & 2.33666327709 & 1.8790139651 & 2.34209282967 \\
+		10 & 1.758 & 1.972 & 1.49 & 2.376 & 2.364 & 3.638 & 2.336 & 1.879 & 2.342 \\
 		\hline
-		20 & 1.75785604419 & 1.83748911208 & 1.42828321306 & 2.37669234777 & 2.37272458089 & 3.63869179026 & 2.32711274457 & 2.33708538967 & 2.33708538967 \\
+		20 & 1.757 & 1.837 & 1.428 & 2.376 & 2.372 & 3.638 & 2.327 & 2.337 & 2.337 \\
 		\hline
-		50 & 2.71128708258 & 1.76079965147 & 1.42663269139 & 2.37669234777 & 2.3765462934 & 3.63869423866 & 9.94765708545 & 2.31360658591 & 2.31360658591 \\
+		50 & 2.711 & 1.760 & 1.426 & 2.376 & 2.376 & 3.638 & 9.947 & 2.313 & 2.313 \\
 		\hline
-		100 & 2.61073339217 & 1.75787704019 & 1.42663264956 & 2.37669234777 & 2.37669193667 & 3.63869423868 & 2.2201498711 & 2.24556306129 & 2.24556306129 \\
+		100 & 2.610 & 1.757 & 1.426 & 2.376& 2.376 & 3.638 & 2.220 & 2.245 & 2.245 \\
 		\hline
-		250 & 2.61073275262 & 1.75785578319 & 1.42663264956 & 2.37669234777 & 2.37669234777 & 3.63869423868 & 1.76209470788 & 2.25803979174 & 1.77110181172 \\
+		250 & 2.610 & 1.757 & 1.426 & 2.376 & 2.376 & 3.638 & 1.762 & 2.258 & 1.771 \\
 		\hline
-		500 & 2.61073275262 & 1.75785578319 & 1.42663264956 & 2.37669234777 & 2.37669234777 & 3.63869423868 & 1.75787351578 & 3.95539173908 & 1.7578980313 \\
+		500 & 2.610 & 1.757 & 1.426 & 2.376 & 2.376 & 3.638 & 1.757 & 3.955 & 1.757 \\
 		\hline
 	\end{tabular}
 \end{table}
