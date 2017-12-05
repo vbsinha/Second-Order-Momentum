@@ -144,7 +144,15 @@ x^+ = x - \eta H \nabla f(x)
 \end{equation}
 
 \subsection{Cubic Regularization}
-This was proposed in []. TODO.
+This was proposed in []. Cubic Regularization builds up on Netwon's method. Networn'a method obtains $x^+$ as:
+\begin{equation}
+	x^+ = argmin_y f(x) + \nabla f(x)^T (y-x) + \frac12 (y-x)^T \nabla^2 (y-x)
+\end{equation}
+
+Cubic regularization goes one term forward in the Taylor expansion and obtains $x^+$ as:
+\begin{equation}
+x^+ = argmin_y f(x) + \nabla f(x)^T (y-x) + \frac12 (y-x)^T \nabla^2 (y-x) + \frac{L}{6}\lVert y-x \rVert_2^3
+\end{equation}
 
 \section{Step Sizes}\label{step}
 The choice of step size can greatly influence the rate of convergence. In our project, we consider two choices - using a fixed step size, and the popular step size found using backtracking line search. The step size is given by $\eta$, as used in the equations previously.
@@ -231,6 +239,8 @@ In other words, we compute
 for fixed values of $k$ and a set of functions $f$ for each class of methods.
 
 \section{Results}\label{results}
+
+
 
 \section{Inferences}\label{inferences}
 
