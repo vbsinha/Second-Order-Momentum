@@ -50,9 +50,9 @@
 
 To achieve faster convergence, second order methods were proposed over first order methods. Although second order methods have better theoretical bounds than first order methods and converge in very few steps, they are often not used in practice due to the cost of each step. To cope with these problems, two approaches have been proposed and well studied: (i) Adding momentum \cite{POLYAK19641,Sutskever} to first order methods to make the convergence speed comparable to second order methods, (ii) Quasi-Newton methods \citep{davidon,broyden1965class,nocedal1980updating} which avoid the costly computations involved in second order methods, with a small cost on the rate of convergence. In this project, we aim to combine both these approaches and attempt to verify if the classical second order methods as well as Quasi-Newton methods can be accelerated.
 
-Momentum has been extensively studied on first order methods \citep{POLYAK19641,Sutskever}. However, there seems to be almost no work done on the effects of momentum on Newton’s method. Through this project we seek to address this problem. <Write about that paper>.
+Momentum has been extensively studied on first order methods \citep{POLYAK19641,Sutskever}. However, there seems to be almost no work done on the effects of momentum on Newton’s method. Through this project we seek to address this problem. \citep{Nesterov2008} proposes acceleration of cubic regularization but this acceleration is not an extension to classical or nesterov's momentum and hence can not be directly appied to Newton's method or BFGS.
 
-We apply momentum to two methods - Newton's method and BFGS. We use both the classical momentum proposed by [] and Nesterov's accelerated gradient proposed by \citet{Sutskever}. A comparison of these approaches is made with gradient descent, gradient descent with momentum, and for some functions, with Cubic Regularization. We study the convergence rates empirically for three convex and four non-convex functions, mostly taken from various benchmarks.
+We apply momentum to two methods - Newton's method and BFGS. We use both the classical momentum proposed by \citep{POLYAK19641} and Nesterov's accelerated gradient proposed by \citet{Sutskever}. A comparison of these approaches is made with gradient descent, gradient descent with momentum, and for some functions, with Cubic Regularization. We study the convergence rates empirically for three convex and four non-convex functions, mostly taken from various benchmarks.
 
 The report is organized as follows. Section \ref{momentum} describes the two momentum methods and their update formulae. In Section \ref{methodology}, we describe our extension of the formulation of momentum for second order methods. Then, in Section \ref{opt}, we describe the methods used for optimization, such as gradient descent and BFGS. This is followed by description of the methods used for finding step sizes in Section \ref{step}. We list the functions used to empirically test our approach in Section \ref{functions}. The experiments conducted then follow in Section \ref{experiments}, and their results are described in Section \ref{results}. Based on these results, we provide our inferences subsequently in Section \ref{inferences}, and conclude in Section \ref{conclusion}.
 
@@ -62,7 +62,7 @@ The code used in this project can be found in its GitHub repository at \url{http
 
 The objective of momentum methods is to accelerate the descent towards the optimal value. It 'damps' the gradient descent when close to the optimal, that allows the use of higher learning rates while avoiding overshooting the point of minimum.
 
-Momentum was first proposed by [] in []. Subsequently, in 2013, usage of Nesterov's accelerated gradient for deep learning was proposed by \citet{Sutskever}, which gave good empirical results.
+Momentum was first proposed by \citep{POLYAK19641}. Subsequently, in 2013, usage of Nesterov's accelerated gradient for deep learning was proposed by \citet{Sutskever}, which gave good empirical results.
 
 The update step for gradient descent is given by
 \begin{equation}
@@ -150,7 +150,7 @@ x^+ = x - \eta H \nabla f(x)
 \end{equation}
 
 \subsection{Cubic Regularization}
-This was proposed in []. Cubic Regularization builds up on Netwon's method. Netwon'a method obtains $x^+$ as:
+This was proposed in \citep{nesterov2006cubic}. Cubic Regularization builds up on Netwon's method. Netwon'a method obtains $x^+$ as:
 \begin{equation}
 	x^+ = argmin_y f(x) + \nabla f(x)^T (y-x) + \frac12 (y-x)^T \nabla^2 (y-x)
 \end{equation}
@@ -210,7 +210,7 @@ where $f(x^*)=0$.
 
 \subsection{Convex functions}
 
-\subsubsection{Quadratic function for cubic regularization}
+\subsubsection{Quadratic function for cubic regularization (Cubic Reg function)}
 \begin{equation}
 f(x,y) = x^2 +y^2 + x^2y^2
 \end{equation}
@@ -250,8 +250,6 @@ We performed a range of experiments across methods, step sizes, and functions. T
 We use Cubic Regularization only on some functions as it requires that the Hessian of the function be Lipschitz, with a known Lipschitz constant $L$.
 
 We separately test on both fixed and backtracking step size. We choose the values of parameters for the step sizes for each method such that, roughly, they provide the best observed convergence rates.
-
-Further, we also experiment over the choice of the parameter $\gamma$ when applying momentum, and observe the effect of its value on the convergence rates of some functions.
 
 \subsection{Performance Metrics}
 A well performing optimization method is characterized by a high rate of convergence over a wide range of problems. The performance of different techniques can be compared by finding the distance from the optimum after a set of fixed, predefined number of iterations.
@@ -679,7 +677,7 @@ Tablulation of the results
 		\hline
 		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
-		0 & 2.344 & 2.344 & 2.344 & 2.344 & 2.34450849719 & 2.344 & 2.344 & 2.34450849719 & 2.344 \\
+		0 & 2.344 & 2.344 & 2.344 & 2.344 & 2.3445 & 2.344 & 2.344 & 2.344 & 2.344 \\
 		\hline
 		5 & 1.761 & 2.0345 & 1.539 & 2.376 & 2.376 & 3.636 & 1.796 & 2.034 & 2.034 \\
 		\hline
@@ -721,7 +719,7 @@ Next, we look at the performance of momentum and Nesterov momentum when used wit
 \ref{fig:Without Backtracking nesterov momentum convergence for Beale's function}. In \ref{fig:Without Backtracking, classical momentum convergence for Beale's function} and \ref{fig:Without Backtracking nesterov momentum convergence for Beale's function}, which correspond to the Beale Function, we observe that Newton's method with momentum and Nesterov's momentum performs better than all other methods. However, in all other cases, using acceleration with Newton's method is always worse than without. This suggests that the existing formulation of momentum is not suitable for Newton's method.
 
 \begin{prop}
-	Both momentum and Nesterov momentum appear to, in most cases to decrease the performance of Newton's method. 
+	Both momentum and Nesterov momentum appear to, in most cases to decrease the performance of Newton's method if the step size is fixed. 
 \end{prop}
 
 We next analyze the performance of acceleration on BFGS. The results with Nesterov momentum can again be seen in	figures \ref{fig:Without Backtracking nesterov momentum convergence for quadratic function},
@@ -735,7 +733,7 @@ We next analyze the performance of acceleration on BFGS. The results with Nester
 \ref{fig:Without Backtracking, classical momentum convergence for Beale's function}. We observe differences in behaviour with different functions. In \ref{fig:Without Backtracking, classical momentum convergence for quadratic function}, \ref{fig:Without Backtracking, classical momentum convergence for Beale's function}, \ref{fig:Without Backtracking nesterov momentum convergence for Rosenbrock's function}, and \ref{fig:Without Backtracking nesterov momentum convergence for Beale's function}, we observe that on the log-scale plot, the performance of BFGS with and without acceleration is very similar. In \ref{fig:Without Backtracking, classical momentum convergence for cubic reg function}, \ref{fig:Without Backtracking, classical momentum convergence for Rosenbrock's function}, and \ref{fig:Without Backtracking nesterov momentum convergence for cubic reg function}, use of acceleration significantly improves the performance of BFGS. However, in \ref{fig:Without Backtracking, classical momentum convergence for Ryan's function}, \ref{fig:Without Backtracking nesterov momentum convergence for quadratic function}, and \ref{fig:Without Backtracking nesterov momentum convergence for Ryan's function}, BFGS without acceleration performs better than BFGS with acceleration. We see that even for non-convex functions, BFGS performs comparably well with and without acceleration. Using acceleration for BFGS thus appears to be a promising direction for future work, and needs to be investigated further.
 
 \begin{prop}
-	Momentum and Nesterov momentum perform comparable - in some cases better, in some cases worse - than optimization without using them, when used on BFGS.
+	Momentum and Nesterov momentum perform comparable - in some cases better, in some cases worse - than optimization without using them, when used on BFGS if the step size is fixed.
 \end{prop}
 
 
@@ -748,11 +746,11 @@ Based on our experiments, it appears that momentum degrades the performance of N
 
 Momentum for first order methods is based on the intuitive idea of damping gradient descent, which allowed the step sizes to be increased. Over the past many decades, strong convergence guarantees have been proven for using momentum. Nesterov's momentum, proposed in 2013 by \citet{Sutskever}, has performed very well for deep learning. In the case of second order methods, an alternative, more intuitive formulation for acceleration might be required, that can exploit the assumptions made in these methods naturally, as opposed to direct application of the first order formulation.
 
-<Cubic Reg>
+%<Cubic Reg>
 
-http://infinity77.net/global\_optimization/test\_functions.html
-http://infinity77.net/global\_optimization/test\_functions.html
-http://infinity77.net/global\_optimization/test\_functions.html
+%http://infinity77.net/global\_optimization/test\_functions.html
+%http://infinity77.net/global\_optimization/test\_functions.html
+%http://infinity77.net/global\_optimization/test\_functions.html
 \bibliographystyle{unsrtnat}
 \bibliography{references}
 
