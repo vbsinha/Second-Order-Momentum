@@ -97,7 +97,10 @@ This will be referred to as 'Nesterov momentum' subsequently in this report, whe
 
 \section{Momentum for Second Order Methods}\label{methodology}
 
-We propose a simple and straightforward extension of the classical momentum and Nesterov's accelerated gradient for second order methods. We replace the $\nabla f(x)$ used in the existing formulations by $U(x)$, where $U$ is the update of the method under consideration. As described briefly in \ref{opt}, $U(x)=\left(\nabla^2 f(x) \right)^{-1}\nabla f(x)$ for Newton's method and $U(x)=H \nabla f(x)$ for BFGS.
+%Additions here
+The original idea of momentum follows from the rolling ball analogy. The intution behind momentum is that along with the direction of the current gradient we also descend in the direction by which we reached at the current position. This helps since the lower we descend, gradient becomes smaller and  so moving extra in the previous direction helps us converge to the minima faster. This intution is confirmed by the mathematical analysis of convergence which proves fatser convergence with momentum for first order method. 
+
+We can follow the same intution of momentum for first order method and ask if adding momentum will help in converging faster for second order methods. To examine this we propose a simple and straightforward extension of the classical momentum and Nesterov's accelerated gradient for second order methods. We replace the $\nabla f(x)$ used in the existing formulations by $U(x)$, where $U$ is the update of the method under consideration. As described briefly in \ref{opt}, $U(x)=\left(\nabla^2 f(x) \right)^{-1}\nabla f(x)$ for Newton's method and $U(x)=H \nabla f(x)$ for BFGS.
 
 The classical momentum update is now given by
 \begin{align*}
@@ -177,7 +180,7 @@ This works well and is useful for computationally intensive methods like Newton'
 
 When using momentum, we replace $x$ and $U$ with values as prescribed by momentum update. So, in the case of classical momentum, we use $x$ and $v^+$, and in the case of Nesterov momentum, we use $v^+$ and $U(v^+)$.
 
-It can be observed that we perform backtracking line search on the momentum update, and not the regular update, to find $\eta$. This is because if we use the regular update, the value of $\eta$ obtained will be a 'good' value assuming we are descending based on the regular update. Since the update includes a momentum term, we perform backtracking line search taking that into account. Nevertheless, we performed experiments in both cases - (i) performing backtracking line search on the update after momentum, and (ii) performing backtracking line search on the update before momentum. We observed across all functions and both momentum types, (ii) performed significantly better than (i), and hence we use that in our study.
+It can be observed that we perform backtracking line search on the momentum update, and not the regular update, to find $\eta$. This is because if we use the regular update, the value of $\eta$ obtained will be a 'good' value assuming we are descending based on the regular update. Since the update includes a momentum term, we perform backtracking line search taking that into account. Nevertheless, we performed experiments in both cases - (i) performing backtracking line search on the update after momentum, and (ii) performing backtracking line search on the update before momentum. We observed across all functions and both momentum types, (i) performed significantly better than (ii), and hence we use that in our study.
 
 \section{Functions Used}\label{functions}
 We now list the functions used to empirically test our approach. This consists of three convex and four non-convex functions, most of which are taken from benchmark functions for optimization problems.
@@ -742,7 +745,7 @@ Our experiments test over a very small set of benchmark functions. It is quite p
 
 
 \section{Conclusion}\label{conclusion}
-Based on our experiments, it appears that momentum degrades the performance of Newton's method. There is no clear advantage on using momentum for BFGS. We also observe that momentum performs poorly, even for gradient descent, when used with backtracking line search.
+Since backtrackking line search is generally used along with Newton's method, our experiments suggest that we should avoid using momentum with Newton's method. There is no clear advantage on using momentum for BFGS. We also observe that momentum performs poorly, even for gradient descent, when used with backtracking line search.
 
 Momentum for first order methods is based on the intuitive idea of damping gradient descent, which allowed the step sizes to be increased. Over the past many decades, strong convergence guarantees have been proven for using momentum. Nesterov's momentum, proposed in 2013 by \citet{Sutskever}, has performed very well for deep learning. In the case of second order methods, an alternative, more intuitive formulation for acceleration might be required, that can exploit the assumptions made in these methods naturally, as opposed to direct application of the first order formulation.
 
