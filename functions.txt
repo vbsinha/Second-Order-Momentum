@@ -1,4 +1,0 @@
-Biggs EXP2 Function : 11.
-Powell's Singular Function : 91. NO CONTOUR PLOT, maybe consider all Powell's ....
-(10x_1^2 + x_2^2)/ 2 + 5 log(1+e^{-x_1-x_2})
-

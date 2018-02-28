@@ -48,15 +48,11 @@ class GradientDescent:
         x = start_x
         v = 0
         points = [start_x]
-   #     print "A"
         for i in range(0,num_iterations):
-    #        print "B"
-            # print x
             if np.fabs(self.function.f(x) - self.function.fstar()) < epsilon:
                 break
             old_v = v
             old_x = x
-       #     eta = step_size(i,x,self.function,self.method)
             v = self.get_velocity_update(x,v)
             if self.momentum_function == 'momentum':
                 eta = step_size(i,x,v,self.function)
@@ -64,7 +60,6 @@ class GradientDescent:
                 v_method_update = self.method(self.function,v)
                 eta = step_size(i,v,v_method_update,self.function)
             x = self.get_position_update(x,old_v,eta)
-            # print "V:",v
             points.append(x)
             self.method.update_state(self.function, x, old_x) 
         points = np.array(points)

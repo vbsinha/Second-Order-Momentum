@@ -26,7 +26,6 @@ g_second_mom = GradientDescent(q, methods.SecondOrder(), 'nesterov', 0.9)
 g_bfgs = GradientDescent(q, methods.BFGS(np.identity(2)))
 g_bfgs_mom = GradientDescent(q, methods.BFGS(np.identity(2)), 'nesterov', 0.9)
 # g_cr = GradientDescent(q, methods.CubicRegularization())
-# print x
 points_first, x_first = g_first.gradient_descent(x, 500, FixedStep(0.1))
 points_first_mom, x_first_mom = g_first_mom.gradient_descent(x, 500, FixedStep(0.1))
 points_second, x_second = g_second.gradient_descent(x, 80, FixedStep(1))

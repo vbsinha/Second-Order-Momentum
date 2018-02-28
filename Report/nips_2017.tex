@@ -272,7 +272,7 @@ For each function, contour plots are shown that characterize the paths taken by 
 \subsection{Convex Functions}
 
 \subsubsection{Quadratic Function}
-
+\begin{center}
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../Images/quadraticnesterov.png}
 	\caption{Without Backtracking nesterov momentum for quadratic function}
@@ -296,14 +296,12 @@ For each function, contour plots are shown that characterize the paths taken by 
 	\caption{Without Backtracking, classical momentum convergence for quadratic function}
 	\label{fig:Without Backtracking, classical momentum convergence for quadratic function}
 \end{figure}
-
-Tablulation of the results
-
+\tiny{
 \begin{table}[H]
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Quadratic function table}
-	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
+	\begin{tabular}{|l|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|}
 		\hline
 		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
@@ -324,7 +322,7 @@ Tablulation of the results
 		500 & 8.881e-16 & 1.413e-08 & 6.625e-07 & 0.0 & 6.661e-16 & 8.881e-16 & 0.0 & 4.440e-16 & 4.440e-16 \\
 		\hline
 	\end{tabular}
-\end{table}
+\end{table}}
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../Images/quadraticnesterovbacktrack.png}
@@ -349,9 +347,9 @@ Tablulation of the results
 	\caption{With Backtracking, classical momentum convergence}
 	\label{fig:With Backtracking, classical momentum convergence for quadratic function}
 \end{figure}
-
-\subsection{Quadratic function for Cubic Regularization}
-
+\end{center}
+\subsubsection{Quadratic function for Cubic Regularization}
+\begin{center}
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../Images/cubicregularizationnesterov.png}
 	\caption{Without Backtracking nesterov momentum for cubic reg function}
@@ -380,7 +378,7 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Cubic Reg function table}
-	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
+	\begin{tabular}{|l|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|}
 		\hline
 		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
@@ -414,9 +412,9 @@ Tablulation of the results
 	\caption{With Backtracking nesterov momentum convergence for cubic reg function}
 	\label{fig:With Backtracking nesterov momentum convergence for cubic reg function}
 \end{figure}
-
-\subsection{Ryan's function}
-
+\end{center}
+\subsubsection{Ryan's function}
+\begin{center}
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../Images/ryannesterov.png}
 	\caption{Without Backtracking nesterov momentum for Ryan's function}
@@ -445,7 +443,7 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Ryan function table}
-	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
+	\begin{tabular}{|l|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|}
 		\hline
 		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
@@ -479,10 +477,11 @@ Tablulation of the results
 	\caption{With Backtracking nesterov momentum convergence for Ryan's function}
 	\label{fig:With Backtracking nesterov momentum convergence for Ryan's function}
 \end{figure}
-		
+\end{center}
 \subsection{Non-Convex Functions}
 
 \subsubsection{Rosebrock's function}
+\begin{center}
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../Images/rosenbrocknesterov.png}
 	\caption{Without Backtracking nesterov momentum for Rosenbrock's function}
@@ -505,7 +504,7 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Rosenbrock's function table}
-	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
+	\begin{tabular}{|l|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|}
 		\hline
 		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
@@ -539,29 +538,29 @@ Tablulation of the results
 	\caption{With Backtracking nesterov momentum convergence for Rosenbrock's function}
 	\label{fig:With Backtracking nesterov momentum convergence for Rosenbrock's function}
 \end{figure}
-
+\end{center}
 \subsubsection{Beale's function}
-
+\begin{center}
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{../Images/baelenesterov.png}
+	\includegraphics[width=\linewidth]{../Images/bealenesterov.png}
 	\caption{Without Backtracking nesterov momentum for Beale's function}
 	\label{fig:Without Backtracking nesterov momentum for Beale's function}
 \end{figure}
 
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{../Images/baelenesterov1.png}
+	\includegraphics[width=\linewidth]{../Images/bealenesterov1.png}
 	\caption{Without Backtracking nesterov momentum convergence for Beale's function}
 	\label{fig:Without Backtracking nesterov momentum convergence for Beale's function}
 \end{figure}
 
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{../Images/baelemomentum.png}
+	\includegraphics[width=\linewidth]{../Images/bealemomentum.png}
 	\caption{Without Backtracking classical momentum for Beale's function}
 	\label{fig:Without Backtracking classical momentum for Beale's function}
 \end{figure}
 
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{../Images/baelemomentum1.png}
+	\includegraphics[width=\linewidth]{../Images/bealemomentum1.png}
 	\caption{Without Backtracking, classical momentum convergence for Beale's function}
 	\label{fig:Without Backtracking, classical momentum convergence for Beale's function}
 \end{figure}
@@ -570,7 +569,7 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Beale's function table}
-	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
+	\begin{tabular}{|l|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|}
 		\hline
 		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
@@ -592,9 +591,9 @@ Tablulation of the results
 		\hline
 	\end{tabular}
 \end{table}
-
+\end{center}
 \subsubsection{Bird's function}
-
+\begin{center}
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../Images/birdnesterov.png}
 	\caption{Without Backtracking nesterov momentum for Bird's function}
@@ -623,7 +622,7 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Bird's function table}
-	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
+	\begin{tabular}{|l|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|}
 		\hline
 		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
@@ -645,9 +644,9 @@ Tablulation of the results
 		\hline
 	\end{tabular}
 \end{table}
-
+\end{center}
 \subsubsection{Levy's function}
-
+\begin{center}
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../Images/levynesterov.png}
 	\caption{Without Backtracking nesterov momentum for Levy's function}
@@ -676,7 +675,7 @@ Tablulation of the results
 	\centering
 	\caption{$ | f(x^k) - f(x^*) | $ after $k$ iterations}
 	\label{Levy's function table}
-	\begin{tabular}{|l|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
+	\begin{tabular}{|l|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|}
 		\hline
 		K & Gradient Descent & Gradient Descent with Momentum & Gradient Descent with Nesterov Momentum & Newton's Method & Newton's Method with Momentum & Newton's Method with Nesterov Momentum & BFGS & BFGS with Momentum & BFGS with Nesterov Momentum \\
 		\hline
@@ -698,7 +697,7 @@ Tablulation of the results
 		\hline
 	\end{tabular}
 \end{table}
-
+\end{center}
 \section{Observations and Inferences}\label{inferences}
 We now describe our observations and inferences based on the results of our experiments.
 

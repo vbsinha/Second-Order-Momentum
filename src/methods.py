@@ -94,7 +94,6 @@ class CubicRegularization:
         for i in range(0,num_iterations):
             old_x = x
             eta = step_size(i,x,self.function,self.method)
-    #        print self.function.grad_f(x)
             x = x - eta*self.function.grad_f(x)
             points.append(x)
             self.method.update_state(self.function, x, old_x)

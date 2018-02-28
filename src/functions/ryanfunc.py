@@ -1,5 +1,4 @@
 # Implement f(x) = (10*x_1^2 + x_2^2)/2 + 5*log(1+e^{-x_1-x_2})
-# f'(x) = 
 
 import numpy as np
 from function import Function
@@ -24,8 +23,6 @@ class RyanFunc(Function):
         a = 1 + b
         second_term = (-5*a*b + 5*b*b)/a*a
         grad2_f_x1_x1 = 10 - second_term
-        # grad2_f_x1_x2 = -1*second_term
-        # grad2_f_x2_x1 = -1*second_term
         grad2_f_x2_x2 = 1 - second_term
         return np.array([[grad2_f_x1_x1, -1*second_term], [-1*second_term, grad2_f_x2_x2]])
         

@@ -28,10 +28,7 @@ def plot_convergence_rate(func, k_range, method_points):
                 break
             f_x = func.f(points[i])
             f_star = func.fstar()
-   #         if f_x-f_star >= 1e-60:
             plot_points.append([f_x-f_star,i])
-    #        else:
-     #           plot_points.append([1e-60,i])
         plot_points = np.array(plot_points)
         plt.plot(plot_points[:,1],plot_points[:,0], label=l)
     plt.title(str(func))

@@ -1,4 +1,4 @@
-# Baele's function
+# Beale's function
 # Evaluate in range : [-4.5, 4.5]
 
 import numpy as np
@@ -30,17 +30,14 @@ class BealeFunc(Function):
         a3 = (-1 + x[1]**3)
         second_term = t1 + a1*x[0] + t2*2*x[1] + 2*a2*2*x[0]*x[1] + t3*3*x[1]**2 + 2*a3*3*x[0]*x[1]**2
         grad2_f_x1_x1 = 2*(a1**2 + a2**2 + a3**2)
-        # grad2_f_x1_x2 = -1*second_term
-        # grad2_f_x2_x1 = -1*second_term
         grad2_f_x2_x2 = 2*x[0]**2 + t2*2*x[0] + 2*(2*x[0]*x[1])**2 + t3*3*2*x[0]*x[1] + 6*(x[1]**2*x[0])
-        # print second_term, grad2_f_x1_x1, grad2_f_x2_x2 
         return np.array([[grad2_f_x1_x1, second_term], [second_term, grad2_f_x2_x2]])
         
     def fstar(self):
         return 0
         
     def __str__(self):
-        return "Baele Function"
+        return "Beale Function"
         
     def levels(self):
         return np.linspace(0, 20, 15)
